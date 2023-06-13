@@ -6,7 +6,7 @@ namespace _6equal0
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello Worergsld!");
 
             //강민기민강
         }
