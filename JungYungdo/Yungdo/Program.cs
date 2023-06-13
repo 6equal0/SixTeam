@@ -9,6 +9,7 @@ namespace Yungdo
             while (true)
             {
                 Console.WriteLine("응어아잇");
+                Console.WriteLine("응");
             }
         }
     }
