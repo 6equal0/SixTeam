@@ -6,7 +6,10 @@ namespace Yungdo
     {
         static void Main(string[] args)
         {
-            //dad
+            while (true)
+            {
+                Console.WriteLine("응어아잇");
+            }
         }
     }
 }
