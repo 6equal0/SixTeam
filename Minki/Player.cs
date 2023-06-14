@@ -10,7 +10,7 @@ namespace Minki
     class Player
     {
         public static List<Player> players = new List<Player>();
-        public static int attackNum = 0;
+        public static int AttackNum { get; set; }
 
         public string name;
         private int hp;
@@ -30,7 +30,7 @@ namespace Minki
             this.power = power;
             this.defensive = defensive;
 
-            players.Add(this);
+            Push();
         }
 
         public void SetPos(int pos = 0)
@@ -60,9 +60,10 @@ namespace Minki
                 Console.Write("(이)가 ");
                 TextOptions.TextColor(ConsoleColor.Red, monster.name);
                 Console.WriteLine("(을)를 공격했습니다.");
+                Thread.Sleep(800);
 
                 monster.Damaged(power);
-                attackNum++;
+                AttackNum++;
                 isAttack = true;
             }
             else
@@ -100,6 +101,8 @@ namespace Minki
             TextOptions.TextColor(ConsoleColor.Green, name);
             Console.WriteLine($"(이)가 사망했습니다.\n");
             die = true;
+
+            Pop();
         }
 
         public void ShowStatus()
@@ -119,6 +122,17 @@ namespace Minki
             Console.Write(" / 방어력: ");
             TextOptions.TextColor(ConsoleColor.DarkCyan, defensive.ToString());
             Console.WriteLine();
+            Console.WriteLine("------------------------------------");
+        }
+
+        public void Push()
+        {
+            players.Add(this);
+        }
+
+        public void Pop()
+        {
+            players.Remove(this);
         }
     }
 }
