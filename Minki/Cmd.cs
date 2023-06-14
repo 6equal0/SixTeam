@@ -111,6 +111,14 @@ namespace Minki
                             ErrorMsg("대상플");
                             goto command;
                         }
+                        else if (inst[1] == "전체")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("------------------------------------");
+                            foreach (Player ply in Player.players)
+                                ply.ShowStatus();
+                            break;
+                        }
                         else if (item.name == inst[1])
                         {
                             item.ShowStatus();
@@ -124,6 +132,14 @@ namespace Minki
                         {
                             ErrorMsg("대상몹");
                             goto command;
+                        }
+                        else if(inst[1] == "전체")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("------------------------------------");
+                            foreach (Monster mon in Monster.monsters)
+                                mon.ShowStatus();
+                            break;
                         }
                         else if (item.name == inst[1])
                         {
@@ -175,26 +191,30 @@ namespace Minki
                 {
                     Command();
 
-                    if (Player.attackNum >= 3)
+                    if (Player.AttackNum >= Player.players.Count)
                         break;
                 }
                 foreach (Player item in Player.players)
                 {
                     item.ResetAttack();
+                    Player.AttackNum = 0;
                 }
                 foreach (Monster item in Monster.monsters)
                 {
-                    item.Attack(Player.players[random.Next(0, Player.players.Count)]);
+                    item.Attack(Player.players);
                 }
-            } while (Player.players.Count == 0 || Monster.monsters.Count == 0);
+            } while (Player.players.Count != 0 && Monster.monsters.Count != 0);
 
-            if (Player.players.Count == 0)
+            Console.WriteLine();
+            if (Monster.monsters.Count == 0)
             {
-                Console.WriteLine("승리하였습니다.");
+                TextOptions.TextColor(ConsoleColor.DarkGreen, "승리하였습니다.");
+                Console.WriteLine();
             }
-            else if(Monster.monsters.Count == 0)
+            else if(Player.players.Count == 0)
             {
-                Console.WriteLine("패배하였습니다.");
+                TextOptions.TextColor(ConsoleColor.DarkRed, "패배하였습니다.");
+                Console.WriteLine();
             }
         }
     }

@@ -15,13 +15,14 @@ namespace Minki
 
         static void Main(string[] args)
         {
-            Console.WriteLine("-------------------------");
+            Console.WriteLine("------------------------------------");
             a.ShowStatus();
-            Console.WriteLine("-------------------------");
             b.ShowStatus();
-            Console.WriteLine("-------------------------");
             c.ShowStatus();
-            Console.WriteLine("-------------------------");
+
+            player1.SetPos(0);
+            player2.SetPos(0);
+            player3.SetPos(0);
 
             Cmd.Command();
             Cmd.Command();
