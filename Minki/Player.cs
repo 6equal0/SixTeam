@@ -50,6 +50,7 @@ namespace Minki
                 TextOptions.TextColor(ConsoleColor.Yellow, pos == 1 ? "전열" : "후열");
                 Console.WriteLine("에 배치되었습니다.");
             }
+            Console.WriteLine();
         }
 
         public void Attack(Monster monster)

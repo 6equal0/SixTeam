@@ -37,8 +37,13 @@ namespace Minki
             List<Player> minPlys = new List<Player>();
             foreach(Player item in players)
             {
-                if (item.Hp <= min)
+                if(item.Hp == min)
                 {
+                    minPlys.Add(item);
+                }
+                else if (item.Hp <= min)
+                {
+                    minPlys.Clear();
                     minPlys.Add(item);
                     min = item.Hp;
                 }
@@ -79,6 +84,7 @@ namespace Minki
             {
                 Console.WriteLine($"남은 체력 : {Hp}");
                 Console.WriteLine();
+                Thread.Sleep(500);
             }
         }
 
@@ -86,6 +92,7 @@ namespace Minki
         {
             TextOptions.TextColor(ConsoleColor.Red, name);
             Console.WriteLine("(이)가 사망했습니다.");
+            Console.WriteLine();
 
             Pop();
         }
