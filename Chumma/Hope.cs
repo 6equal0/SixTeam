@@ -20,7 +20,7 @@ namespace Chumma
 
         public void Welcome()
         {
-            HashSet<int>  playerCounts = new HashSet<int>();
+            HashSet<int> playerCounts = new HashSet<int>();
 
             while (playerCounts.Count < 3)
             {
