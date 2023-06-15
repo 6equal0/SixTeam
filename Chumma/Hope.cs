@@ -1,111 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Chumma
 {
     class Hope
     {
-        
+        public int playerCount;
+        int i;
+        public int[] randChar;
+        public List<int> player_number = new List<int>();
+
         Random rand = new Random();
+        int count = 0;
+        public string[] name = { "강민기", "강윤구","권도현", "김대현", "김민재", "김아윤",
+                                "김준표", "김진현", "노병민",
+                                "박영준", "심하나", "오윤성", "유근영", "윤서진",
+                                "이승준", "이정빈", "이지우", "장서윤", "정영도", "최강호","홍상화"};
+
         public void Welcome()
         {
-            HashSet<int> playerCounts = new HashSet<int>();
+            HashSet<int>  playerCounts = new HashSet<int>();
 
             while (playerCounts.Count < 3)
             {
-                int playerCount = rand.Next(1, 22);
+                i++;
+                playerCount = rand.Next(1, 22);
                 playerCounts.Add(playerCount);
             }
-
+            foreach(var item in playerCounts)
+            {
+                player_number.Add(item);
+            }
+            for(int j=0; j <3; j++)
+            {
+                Console.WriteLine($"{player_number[j]} 랜덤값 여기에 담기다\n");
+            }
             foreach (int playerCount in playerCounts)
             {
-                Console.WriteLine(playerCount);
-            }
-            switch (playerCounts)
-            {
-                case 1:
-                    Console.WriteLine("강민기");
-                    break;
-                case 2:
-                    Console.WriteLine("강윤구");
-                    break;
-                case 3:
-                    Console.WriteLine("권도현");
-                    break;
-                case 4:
-                    Console.WriteLine("김대현");
-                    break;
-                case 5:
-                    Console.WriteLine("김민재");
-                    break;
-                case 6:
-                    Console.WriteLine("김아윤");
-                    break;
-                case 7:
-                    Console.WriteLine("김준표");
-                    break;
-                case 8:
-                    Console.WriteLine("김진현");
-                    break;
-                case 9:
-                    Console.WriteLine("노병민");
-                    break;
-                case 10:
-                    Console.WriteLine("박영준");
-                    break;
-                case 11:
-                    Console.WriteLine("심하나");
-                    break;
-                case 12:
-                    Console.WriteLine("오윤성");
-                    break;
-                case 13:
-                    Console.WriteLine("유근영");
-                    break;
-                case 14:
-                    Console.WriteLine("윤서진");
-                    break;
-                case 15:
-                    Console.WriteLine("이승준");
-                    break;
-                case 16:
-                    Console.WriteLine("이정빈");
-                    break;
-                case 17:
-                    Console.WriteLine("이지우");
-                    break;
-                case 18:
-                    Console.WriteLine("장서윤");
-                    break;
-                case 19:
-                    Console.WriteLine("정영도");
-                    break;
-                case 20:
-                    Console.WriteLine("최강호");
-                    break;
-                case 21:
-                    Console.WriteLine("홍상화");
-                    break;
-             
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                Console.WriteLine($"[{playerCount}]{name[playerCount - 1]}");
             }
         }
     }
