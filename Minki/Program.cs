@@ -23,6 +23,7 @@ namespace Minki
             player1.SetPos(0);
             player2.SetPos(0);
             player3.SetPos(0);
+            Console.WriteLine();
 
             Cmd.Command();
             Cmd.Command();
