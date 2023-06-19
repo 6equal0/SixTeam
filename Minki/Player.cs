@@ -10,6 +10,9 @@ namespace Minki
     class Player
     {
         public static List<Player> players = new List<Player>();
+        public static List<Player> frontPlayers = new List<Player>();
+        public static List<Player> backPlayers = new List<Player>();
+
         public static int AttackNum { get; set; }
 
         public string name;
@@ -43,7 +46,22 @@ namespace Minki
             }
             else
             {
-                position = pos;
+                if(pos == 0)
+                {
+                    if (frontPlayers.Contains(this))
+                        frontPlayers.Remove(this);
+
+                    position = pos;
+                    backPlayers.Add(this);
+                }
+                else if (pos == 1)
+                {
+                    if (backPlayers.Contains(this))
+                        backPlayers.Remove(this);
+
+                    position = pos;
+                    frontPlayers.Add(this);
+                }
 
                 TextOptions.TextColor(ConsoleColor.Green, name);
                 Console.Write("(이)가 ");
@@ -108,6 +126,7 @@ namespace Minki
 
         public void ShowStatus()
         {
+            Console.WriteLine("------------------------------------");
             Console.Write($"이름: ");
             TextOptions.TextColor(ConsoleColor.DarkYellow, name);
             Console.Write($" / 배치: ");
