@@ -56,10 +56,6 @@ namespace Chumma
                     }
                 }
             }
-
-            Console.WriteLine(SelectPlayer[0]);
-            Console.WriteLine(SelectPlayer[1]);
-            Console.WriteLine(SelectPlayer[2]);
         }
 
         public static bool IsCharacterSelected(int characterNumber)
