@@ -16,18 +16,23 @@ namespace Minki
         public string name;
         private int hp;
         private int power;
+        private bool boss = false;
 
         public int Hp { get => hp; set => hp = (int)MathF.Max(0, value); }
 
-        public Monster(string name, int hp, int power)
+        public Monster(string name, int hp, int power, bool boss = false)
         {
             this.name = name;
             Hp = hp;
             this.power = power;
+            this.boss = boss;
 
             Push();
 
-            TextOptions.TextColor(ConsoleColor.Red, name);
+            if (boss)
+                TextOptions.TextColor(ConsoleColor.Red, "Boss: " + this.name);
+            else
+                TextOptions.TextColor(ConsoleColor.Red, this.name);
             Console.WriteLine($"(이)가 생성되었습니다.");
         }
 
@@ -54,7 +59,7 @@ namespace Minki
             TextOptions.TextColor(ConsoleColor.Red, name);
             Console.Write("(이)가 ");
             TextOptions.TextColor(ConsoleColor.Green, player.name);
-            Console.WriteLine("을 공격했습니다.");
+            Console.WriteLine("을(를) 공격했습니다.");
             Thread.Sleep(800);
 
             if (player.position == 1)
@@ -64,6 +69,88 @@ namespace Minki
             else if (player.position == 0)
             {
                 player.Damaged(power);
+            }
+            else
+            {
+                Console.WriteLine("-------------------Error-------------------");
+            }
+        }
+
+        public void BossAttack(List<Player> players)
+        {
+            int min = 100;
+            List<Player> minPlys = new List<Player>();
+            foreach (Player item in players)
+            {
+                if (item.Hp == min)
+                {
+                    minPlys.Add(item);
+                }
+                else if (item.Hp <= min)
+                {
+                    minPlys.Clear();
+                    minPlys.Add(item);
+                    min = item.Hp;
+                }
+            }
+
+            Player player1 = minPlys[random.Next(minPlys.Count - 1)];
+
+            min = 100;
+            minPlys = new List<Player>();
+            foreach (Player item in players)
+            {
+                if (item.Hp == min)
+                {
+                    minPlys.Add(item);
+                }
+                else if (item.Hp <= min)
+                {
+                    minPlys.Clear();
+                    minPlys.Add(item);
+                    min = item.Hp;
+                }
+            }
+
+            Player player2 = minPlys[random.Next(minPlys.Count - 1)];
+
+            TextOptions.TextColor(ConsoleColor.Red, name);
+            Console.Write("(이)가 ");
+
+            if (player1 == player2)
+            {
+                TextOptions.TextColor(ConsoleColor.Green, player1.name);
+                Console.Write("(과)와");
+                TextOptions.TextColor(ConsoleColor.Green, player2.name);
+                Console.WriteLine("을(를) 공격했습니다.");
+            }
+            else
+            {
+                TextOptions.TextColor(ConsoleColor.Green, player1.name);
+                Console.Write("(을)를 2번 공격했습니다.");
+            }
+            Thread.Sleep(800);
+
+            if (player1.position == 1)
+            {
+                player1.Damaged(power - player1.defensive);
+            }
+            else if (player1.position == 0)
+            {
+                player1.Damaged(power);
+            }
+            else
+            {
+                Console.WriteLine("-------------------Error-------------------");
+            }
+
+            if (player2.position == 1)
+            {
+                player2.Damaged(power - player2.defensive);
+            }
+            else if (player2.position == 0)
+            {
+                player2.Damaged(power);
             }
             else
             {
@@ -99,6 +186,11 @@ namespace Minki
 
         public void ShowStatus()
         {
+            Console.WriteLine("------------------------------------");
+            if (boss)
+            {
+                TextOptions.TextColor(ConsoleColor.Magenta, "Boss\n");
+            }
             Console.Write($"이름: ");
             TextOptions.TextColor(ConsoleColor.DarkYellow, name);
             Console.Write($" / 체력: ");

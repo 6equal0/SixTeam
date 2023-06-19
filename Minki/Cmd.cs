@@ -14,7 +14,7 @@ namespace Minki
 
         public static void Command()
         {
-            Console.Write("명령어를 입력하세요 : ");
+            Console.Write("\n명령어를 입력하세요 : ");
 
             string[] inst = Console.ReadLine().Split();
 
@@ -22,6 +22,9 @@ namespace Minki
             {
                 case "/배틀시작":
                     BattleStart();
+                    break;
+                case "/보스시작":
+                    BossStart();
                     break;
                 case "/공격":
                     Attack(inst);
@@ -70,6 +73,70 @@ namespace Minki
                     break;
             }
         }
+        
+        private static void BossStart()
+        {
+            yn = "";
+
+            Console.Write("배치를 완료하셨습니까? (");
+            TextOptions.TextColor(ConsoleColor.DarkGreen, "y");
+            Console.Write("/");
+            TextOptions.TextColor(ConsoleColor.DarkRed, "n");
+            Console.WriteLine(")");
+
+            do
+            {
+                yn = Console.ReadLine();
+                if (yn == "y")
+                {
+                    Console.WriteLine("배틀을 시작합니다.");
+                    Console.WriteLine();
+                }
+                else if (yn == "n")
+                {
+                    Console.WriteLine("배치를 완료하고 와주십시오.");
+                    Command();
+                    return;
+                }
+                else
+                    Console.WriteLine("올바른 대답을 해주십시오.");
+            } while (yn != "y" && yn != "n");
+            Thread.Sleep(600);
+
+            if(Player.players.Count == 0 || Monster.monsters.Count == 0)
+                Console.WriteLine("-------------------Error-------------------");
+
+            while (Player.players.Count != 0 && Monster.monsters.Count != 0)
+            {
+                Console.WriteLine("공격을 진행해주세요.\n");
+                while (Monster.monsters.Count > 0)
+                {
+                    Command();
+
+                    if (Player.AttackNum >= Player.backPlayers.Count)
+                        break;
+                }
+                foreach (Player item in Player.backPlayers)
+                {
+                    item.ResetAttack();
+                    Player.AttackNum = 0;
+                }
+                Thread.Sleep(500);
+                foreach (Monster item in Monster.monsters)
+                {
+                    item.BossAttack(Player.frontPlayers);
+                }
+            }
+
+            if (Player.players.Count == 0)
+            {
+                Console.WriteLine("패배");
+            }
+            else if (Monster.monsters.Count == 0)
+            {
+                Console.WriteLine("승리");
+            }
+        }
 
         static void BattleStart()
         {
@@ -98,6 +165,7 @@ namespace Minki
                 else
                     Console.WriteLine("올바른 대답을 해주십시오.");
             } while (yn != "y" && yn != "n");
+            Thread.Sleep(600);
 
             do
             {
@@ -106,10 +174,10 @@ namespace Minki
                 {
                     Command();
 
-                    if (Player.AttackNum >= Player.players.Count)
+                    if (Player.AttackNum >= Player.backPlayers.Count)
                         break;
                 }
-                foreach (Player item in Player.players)
+                foreach (Player item in Player.backPlayers)
                 {
                     item.ResetAttack();
                     Player.AttackNum = 0;
@@ -117,7 +185,7 @@ namespace Minki
                 Thread.Sleep(500);
                 foreach (Monster item in Monster.monsters)
                 {
-                    item.Attack(Player.players);
+                    item.Attack(Player.frontPlayers);
                 }
             } while (Player.players.Count != 0 && Monster.monsters.Count != 0);
             Thread.Sleep(500);
@@ -137,25 +205,31 @@ namespace Minki
 
         static void Attack(string[] inst)
         {
-            foreach (Player item in Player.players)
+            if(inst.Length == 1 || inst.Length == 2)
             {
-                if (inst.Length == 1 || (inst.Length == 2 && item != Player.players[Player.players.Count - 1]))
-                {
-                    ErrorMsg("대상플");
-                    Command();
-                    return;
-                }
-                else if (item.name == inst[1])
+                Console.WriteLine("사용방법: '/공격 [플레이어] [대상몬스터]'");
+                return;
+            }
+            else if (!CheckP(inst[1]))
+            {
+                ErrorMsg("대상플");
+                Command();
+                return;
+            }
+            else if (!CheckM(inst[2]))
+            {
+                ErrorMsg("대상몹");
+                Command();
+                return;
+            }
+
+            foreach (Player item in Player.backPlayers)
+            {
+                if (item.name == inst[1])
                 {
                     foreach (Monster mon in Monster.monsters)
                     {
-                        if (inst.Length == 2 || (inst.Length == 3 && (inst[2] != mon.name && mon == Monster.monsters[Monster.monsters.Count - 1])))
-                        {
-                            ErrorMsg("대상몹");
-                            Command();
-                            return;
-                        }
-                        else if (mon.name == inst[2])
+                        if (mon.name == inst[2])
                         {
                             item.Attack(mon);
                             break;
@@ -168,15 +242,21 @@ namespace Minki
 
         static void Deployment(string[] inst)
         {
+            if(inst.Length == 1)
+            {
+                Console.WriteLine("사용방법: '/배치 [플레이어] [전열, 후열]'");
+                return;
+            }
+            else if(!CheckP(inst[1]))
+            {
+                ErrorMsg("대상플");
+                Command();
+                return;
+            }
+
             foreach (Player item in Player.players)
             {
-                if (inst.Length == 1 || (inst.Length == 2 && item == Player.players[Player.players.Count - 1]))
-                {
-                    ErrorMsg("대상플");
-                    Command();
-                    return;
-                }
-                else if (item.name == inst[1])
+                if (item.name == inst[1])
                 {
                     if (inst.Length == 2)
                     {
@@ -201,15 +281,21 @@ namespace Minki
 
         static void ShowStat(string[] inst)
         {
+            if (inst.Length == 1)
+            {
+                Console.WriteLine("사용방법: '/능력치 [플레이어]'");
+                return;
+            }
+            else if (!CheckP(inst[1]))
+            {
+                ErrorMsg("대상플");
+                Command();
+                return;
+            }
+
             foreach (Player item in Player.players)
             {
-                if (inst.Length == 1 || (inst.Length == 1 && item == Player.players[Player.players.Count - 1]))
-                {
-                    ErrorMsg("대상플");
-                    Command();
-                    return;
-                }
-                else if (inst[1] == "전체")
+                if (inst[1] == "전체")
                 {
                     Console.WriteLine();
                     Console.WriteLine("------------------------------------");
@@ -220,21 +306,28 @@ namespace Minki
                 else if (item.name == inst[1])
                 {
                     item.ShowStatus();
+                    return;
                 }
             }
         }
 
         static void Spectate(string[] inst)
         {
+            if (inst.Length == 1)
+            {
+                Console.WriteLine("사용방법: '/관찰 [대상몬스터]'");
+                return;
+            }
+            else if (!CheckM(inst[1]))
+            {
+                ErrorMsg("대상몹");
+                Command();
+                return;
+            }
+
             foreach (Monster item in Monster.monsters)
             {
-                if (inst.Length == 1 || (inst.Length == 1 && item == Monster.monsters[Monster.monsters.Count - 1]))
-                {
-                    ErrorMsg("대상몹");
-                    Command();
-                    return;
-                }
-                else if (inst[1] == "전체")
+                if (inst[1] == "전체")
                 {
                     Console.WriteLine();
                     Console.WriteLine("------------------------------------");
@@ -245,8 +338,29 @@ namespace Minki
                 else if (item.name == inst[1])
                 {
                     item.ShowStatus();
+                    return;
                 }
             }
+        }
+
+        static bool CheckP(string name)
+        {
+            foreach (Player item in Player.players)
+            {
+                if (item.name == name)
+                    return true;
+            }
+            return false;
+        }
+
+        static bool CheckM(string name)
+        {
+            foreach (Monster item in Monster.monsters)
+            {
+                if (item.name == name)
+                    return true;
+            }
+            return false;
         }
     }
 }
