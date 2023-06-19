@@ -9,8 +9,45 @@ namespace _6equal0
 {
     class MainMenu
     {
+        public static void beepStart()
+        {
+            while (true)
+            {
+                Console.Beep();
+                Thread.Sleep(100);
+            }
+        }
+        static void Empty(int count)
+            {
+                for (int i = 0; i < count; i++) Console.Write(" ");
+            }
+        static void Select(int time)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("y");
+                Thread.Sleep(time);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("/");
+                Thread.Sleep(time);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("n");
+                Thread.Sleep(time);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("]");
+                Thread.Sleep(time);
+            }
+        public static void Texting(string text, int time)
+            {
+                foreach (char c in text)
+                {
+                    Console.Write(c);
+                    Thread.Sleep(time);
+                }
+            }
         public static void Question()
         {
+        Console.ForegroundColor = ConsoleColor.White;
+
         firstQuestion:
             Console.Clear();
 
@@ -60,107 +97,204 @@ namespace _6equal0
                     goto secondQuestion;
             }
         }
-        static void Empty(int count)
-            {
-                for (int i = 0; i < count; i++) Console.Write(" ");
-            }
-        static void Select(int time)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write("y");
-                Thread.Sleep(time);
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.Write("/");
-                Thread.Sleep(time);
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("n");
-                Thread.Sleep(time);
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.Write("]");
-                Thread.Sleep(time);
-            }
         static void gotoMain()
+        {
+            //Thread beepMusic = new Thread(() => beepStart());
+            //beepMusic.Start();
+
+            Console.Clear();
+            Thread.Sleep(1000);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+            Console.WriteLine("                             -====*~               .*=;-.              .;=!~.                ~=*:,               :=*:,   -*====- ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@@@;            ,!!~, !@@:                :@@;            :!;-.,$@=,               ,#@#.  .;@@@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@@=.      ,::-.  ,=@#.-@@.           .    ,$@-      ~:~,   :@@=.!@!    ~,,,--:*:.   =@=    ,*@@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@#:        ;@#-   !@$.,@#.   ,-,,,,-~!-   ,$@-      ,=@!.   @@; !@!    ;#####@@#:   =@*     :#@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@$,   ..   -@$..,.!@=.,@#.   -=$=$$$@@$,  ,$@-  -.  .!@;.,, @@: !@!     ;;:~:$@=-   =@*     ,=@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@*    ,;!;;*@#!*=;!@=.,@#.    ~*;;:;@@=.  ,$@-  :!;;!$@=!*=.@@: !@!         ;@#;~~~~$@*      !@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@#:     !#$=**!!!=!=@=.,@#.     .   ;@#~   ,$@-  .$#$=**!!*=~@@: !@!        ~#@;,;$$$@@*      :#@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@#-     .--,::,..,,*@=.,@#.        -@@!-;;;*#@-   ,-,-:-,..,,@@: !@!       ,$@#!,,:~~$@*      ~#@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@#,       .*$$**:  !@#;!@#.       .=@$,,=###@@-     -=$=**,  @@*;$@!      .=@*;$=!,  =@*      -$@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@$.       *@#*;*#: !@@#@@#.       !@@#! -~,~$@-    ,#@$!;$$, @@@#@@!     .=@;. ;##~  =@*      ,$@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@$.      ~#@,  -#$-!@$,~@#.      ;@@,;@$~  ,$@-    *@=.  !@: @@;,*@!    ,$@-    !@:  =@:      .=@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@$.      :@$   -$#~!@=.,@#.     ~#@,  !@$~ ,$@-    $@;   !@! @@: !@!   ,#!.     -*-  =:       .=@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@$.      ~@#   ~@$-!@=.,@#.    ~$#,   .$#: ,$@-    =@*   *@: @@: !@!  ;!.       ..   -        ,$@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@#,      .$@$~:#@; !@=.,@#.   ~=!.     -#; ,$@-    -@@*~*@#, @@: !@!       ;;:~~::;!=@#-      -$@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@#~       ,$###$!. !@=.,@#.  -;-       ,;  ,$@-     :$###$-  @@: !@!        *##$$$$$$@@:      ~#@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@;         -::,   !@=.,@#.  .             ,$@-      .~:-.   @@: !@!        .:,..   .#@-      ;@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@*                !@! ,@#.                ,$@-              @@- !@!                .#@-      *@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@$,               ;$- ,@#                 ,$#,              @*  !@;                .#@-     -$@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@@;               ;;. ,@;                 ,=;.              #,  ;$-                .#@-     ;@@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@@$-              ~,  ,#.                 .!-               *   :!                 .#*.    -$@@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             :@@@@*,             .   .*                  .~.               ,   -~                 .=.    ,*@@@@~ ");
+            Thread.Sleep(75);
+            Console.WriteLine("                             ,::::~,                  ,                                                            ,     .~::::. ");
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("\n\n\n");
+            Empty(69);
+            Texting("< < 시 작 하 기 > >", 40);
+            Console.Write("\n\n");
+            Empty(69);
+            Texting("< < 종 료 하 기 > >\n\n\n\n\n\n", 40);
+            for (int i = 0; i < 156; i++) Console.Write("-");
+            Console.WriteLine("\n W , S / ↑ , ↓ 로  이 동   |   스 페 이 스 바 로  선 택");
+            Console.WriteLine("제작 - 6팀 : 강민기, 김준표, 유근영, 정영도");
+
+            bool sijakhagi = true;
+
+            Sijak();
+            while (true)
             {
-                Console.Clear();
-                Thread.Sleep(1000);
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                bool STTTTOOOP = false;
+                ConsoleKeyInfo key;
+                key = Console.ReadKey(true);
 
-                Console.WriteLine("                             -====*~               .*=;-.              .;=!~.                ~=*:,               :=*:,   -*====- ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@@@;            ,!!~, !@@:                :@@;            :!;-.,$@=,               ,#@#.  .;@@@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@@=.      ,::-.  ,=@#.-@@.           .    ,$@-      ~:~,   :@@=.!@!    ~,,,--:*:.   =@=    ,*@@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@#:        ;@#-   !@$.,@#.   ,-,,,,-~!-   ,$@-      ,=@!.   @@; !@!    ;#####@@#:   =@*     :#@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@$,   ..   -@$..,.!@=.,@#.   -=$=$$$@@$,  ,$@-  -.  .!@;.,, @@: !@!     ;;:~:$@=-   =@*     ,=@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@*    ,;!;;*@#!*=;!@=.,@#.    ~*;;:;@@=.  ,$@-  :!;;!$@=!*=.@@: !@!         ;@#;~~~~$@*      !@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@#:     !#$=**!!!=!=@=.,@#.     .   ;@#~   ,$@-  .$#$=**!!*=~@@: !@!        ~#@;,;$$$@@*      :#@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@#-     .--,::,..,,*@=.,@#.        -@@!-;;;*#@-   ,-,-:-,..,,@@: !@!       ,$@#!,,:~~$@*      ~#@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@#,       .*$$**:  !@#;!@#.       .=@$,,=###@@-     -=$=**,  @@*;$@!      .=@*;$=!,  =@*      -$@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@$.       *@#*;*#: !@@#@@#.       !@@#! -~,~$@-    ,#@$!;$$, @@@#@@!     .=@;. ;##~  =@*      ,$@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@$.      ~#@,  -#$-!@$,~@#.      ;@@,;@$~  ,$@-    *@=.  !@: @@;,*@!    ,$@-    !@:  =@:      .=@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@$.      :@$   -$#~!@=.,@#.     ~#@,  !@$~ ,$@-    $@;   !@! @@: !@!   ,#!.     -*-  =:       .=@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@$.      ~@#   ~@$-!@=.,@#.    ~$#,   .$#: ,$@-    =@*   *@: @@: !@!  ;!.       ..   -        ,$@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@#,      .$@$~:#@; !@=.,@#.   ~=!.     -#; ,$@-    -@@*~*@#, @@: !@!       ;;:~~::;!=@#-      -$@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@#~       ,$###$!. !@=.,@#.  -;-       ,;  ,$@-     :$###$-  @@: !@!        *##$$$$$$@@:      ~#@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@;         -::,   !@=.,@#.  .             ,$@-      .~:-.   @@: !@!        .:,..   .#@-      ;@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@*                !@! ,@#.                ,$@-              @@- !@!                .#@-      *@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@$,               ;$- ,@#                 ,$#,              @*  !@;                .#@-     -$@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@@;               ;;. ,@;                 ,=;.              #,  ;$-                .#@-     ;@@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@@$-              ~,  ,#.                 .!-               *   :!                 .#*.    -$@@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             :@@@@*,             .   .*                  .~.               ,   -~                 .=.    ,*@@@@~ ");
-                Thread.Sleep(75);
-                Console.WriteLine("                             ,::::~,                  ,                                                            ,     .~::::. ");
-
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("\n\n\n");
-                Empty(69);
-                Texting("< < 시 작 하 기 > >", 50);
-                Console.Write("\n\n");
-                Empty(69);
-                Texting("< < 종 료 하 기 > >\n\n\n\n", 50);
-
-            command:
-
-                string startDisplay = Console.ReadLine();
-                switch (startDisplay)
+                switch (key.Key)
                 {
-                    case "/시작하기":
-                        Story();
+                    case ConsoleKey.W:
+                        Sijak();
+                        sijakhagi = true;
                         break;
-                    case "/종료하기":
-                        Console.WriteLine("여기에 종료하는 코드 입력");
+                    case ConsoleKey.UpArrow:
+                        Sijak();
+                        sijakhagi = true;
+                        break;
+                    case ConsoleKey.S:
+                        Nagagi();
+                        sijakhagi = false;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        Nagagi();
+                        sijakhagi = false;
+                        break;
+                    case ConsoleKey.Spacebar:
+                        if (!sijakhagi)
+                        {
+                            Environment.Exit(0);
+                            return;
+                        }
+                        STTTTOOOP = true;
                         break;
                     default:
-                        Texting("올바른 명령어를 입력 해 주세요.", 40);
-                        goto command;
+                        break;
                 }
+
+                if (STTTTOOOP) break;
             }
-        public static void Texting(string text, int time)
-            {
-                foreach (char c in text)
-                {
-                    Console.Write(c);
-                    Thread.Sleep(time);
-                }
-            }
+
+            Story();
+        }
+        static void Sijak()
+        {
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+            Console.WriteLine("                             -====*~               .*=;-.              .;=!~.                ~=*:,               :=*:,   -*====- ");
+            Console.WriteLine("                             :@@@@;            ,!!~, !@@:                :@@;            :!;-.,$@=,               ,#@#.  .;@@@@~ ");
+            Console.WriteLine("                             :@@@=.      ,::-.  ,=@#.-@@.           .    ,$@-      ~:~,   :@@=.!@!    ~,,,--:*:.   =@=    ,*@@@~ ");
+            Console.WriteLine("                             :@@#:        ;@#-   !@$.,@#.   ,-,,,,-~!-   ,$@-      ,=@!.   @@; !@!    ;#####@@#:   =@*     :#@@~ ");
+            Console.WriteLine("                             :@@$,   ..   -@$..,.!@=.,@#.   -=$=$$$@@$,  ,$@-  -.  .!@;.,, @@: !@!     ;;:~:$@=-   =@*     ,=@@~ ");
+            Console.WriteLine("                             :@@*    ,;!;;*@#!*=;!@=.,@#.    ~*;;:;@@=.  ,$@-  :!;;!$@=!*=.@@: !@!         ;@#;~~~~$@*      !@@~ ");
+            Console.WriteLine("                             :@#:     !#$=**!!!=!=@=.,@#.     .   ;@#~   ,$@-  .$#$=**!!*=~@@: !@!        ~#@;,;$$$@@*      :#@~ ");
+            Console.WriteLine("                             :@#-     .--,::,..,,*@=.,@#.        -@@!-;;;*#@-   ,-,-:-,..,,@@: !@!       ,$@#!,,:~~$@*      ~#@~ ");
+            Console.WriteLine("                             :@#,       .*$$**:  !@#;!@#.       .=@$,,=###@@-     -=$=**,  @@*;$@!      .=@*;$=!,  =@*      -$@~ ");
+            Console.WriteLine("                             :@$.       *@#*;*#: !@@#@@#.       !@@#! -~,~$@-    ,#@$!;$$, @@@#@@!     .=@;. ;##~  =@*      ,$@~ ");
+            Console.WriteLine("                             :@$.      ~#@,  -#$-!@$,~@#.      ;@@,;@$~  ,$@-    *@=.  !@: @@;,*@!    ,$@-    !@:  =@:      .=@~ ");
+            Console.WriteLine("                             :@$.      :@$   -$#~!@=.,@#.     ~#@,  !@$~ ,$@-    $@;   !@! @@: !@!   ,#!.     -*-  =:       .=@~ ");
+            Console.WriteLine("                             :@$.      ~@#   ~@$-!@=.,@#.    ~$#,   .$#: ,$@-    =@*   *@: @@: !@!  ;!.       ..   -        ,$@~ ");
+            Console.WriteLine("                             :@#,      .$@$~:#@; !@=.,@#.   ~=!.     -#; ,$@-    -@@*~*@#, @@: !@!       ;;:~~::;!=@#-      -$@~ ");
+            Console.WriteLine("                             :@#~       ,$###$!. !@=.,@#.  -;-       ,;  ,$@-     :$###$-  @@: !@!        *##$$$$$$@@:      ~#@~ ");
+            Console.WriteLine("                             :@@;         -::,   !@=.,@#.  .             ,$@-      .~:-.   @@: !@!        .:,..   .#@-      ;@@~ ");
+            Console.WriteLine("                             :@@*                !@! ,@#.                ,$@-              @@- !@!                .#@-      *@@~ ");
+            Console.WriteLine("                             :@@$,               ;$- ,@#                 ,$#,              @*  !@;                .#@-     -$@@~ ");
+            Console.WriteLine("                             :@@@;               ;;. ,@;                 ,=;.              #,  ;$-                .#@-     ;@@@~ ");
+            Console.WriteLine("                             :@@@$-              ~,  ,#.                 .!-               *   :!                 .#*.    -$@@@~ ");
+            Console.WriteLine("                             :@@@@*,             .   .*                  .~.               ,   -~                 .=.    ,*@@@@~ ");
+            Console.WriteLine("                             ,::::~,                  ,                                                            ,     .~::::. ");
+
+            Console.Write("\n\n\n");
+            Empty(69);
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.WriteLine("< < 시 작 하 기 > >");
+            Console.ResetColor();
+            Console.Write("\n");
+            Empty(69);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("< < 종 료 하 기 > >\n\n\n\n\n\n");
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            for (int i = 0; i < 156; i++) Console.Write("-");
+            Console.WriteLine("\n W , S / ↑ , ↓ 로  이 동   |   스 페 이 스 바 로  선 택");
+            Console.WriteLine("제작 - 6팀 : 강민기, 김준표, 유근영, 정영도");
+        }
+        static void Nagagi()
+        {
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+            Console.WriteLine("                             -====*~               .*=;-.              .;=!~.                ~=*:,               :=*:,   -*====- ");
+            Console.WriteLine("                             :@@@@;            ,!!~, !@@:                :@@;            :!;-.,$@=,               ,#@#.  .;@@@@~ ");
+            Console.WriteLine("                             :@@@=.      ,::-.  ,=@#.-@@.           .    ,$@-      ~:~,   :@@=.!@!    ~,,,--:*:.   =@=    ,*@@@~ ");
+            Console.WriteLine("                             :@@#:        ;@#-   !@$.,@#.   ,-,,,,-~!-   ,$@-      ,=@!.   @@; !@!    ;#####@@#:   =@*     :#@@~ ");
+            Console.WriteLine("                             :@@$,   ..   -@$..,.!@=.,@#.   -=$=$$$@@$,  ,$@-  -.  .!@;.,, @@: !@!     ;;:~:$@=-   =@*     ,=@@~ ");
+            Console.WriteLine("                             :@@*    ,;!;;*@#!*=;!@=.,@#.    ~*;;:;@@=.  ,$@-  :!;;!$@=!*=.@@: !@!         ;@#;~~~~$@*      !@@~ ");
+            Console.WriteLine("                             :@#:     !#$=**!!!=!=@=.,@#.     .   ;@#~   ,$@-  .$#$=**!!*=~@@: !@!        ~#@;,;$$$@@*      :#@~ ");
+            Console.WriteLine("                             :@#-     .--,::,..,,*@=.,@#.        -@@!-;;;*#@-   ,-,-:-,..,,@@: !@!       ,$@#!,,:~~$@*      ~#@~ ");
+            Console.WriteLine("                             :@#,       .*$$**:  !@#;!@#.       .=@$,,=###@@-     -=$=**,  @@*;$@!      .=@*;$=!,  =@*      -$@~ ");
+            Console.WriteLine("                             :@$.       *@#*;*#: !@@#@@#.       !@@#! -~,~$@-    ,#@$!;$$, @@@#@@!     .=@;. ;##~  =@*      ,$@~ ");
+            Console.WriteLine("                             :@$.      ~#@,  -#$-!@$,~@#.      ;@@,;@$~  ,$@-    *@=.  !@: @@;,*@!    ,$@-    !@:  =@:      .=@~ ");
+            Console.WriteLine("                             :@$.      :@$   -$#~!@=.,@#.     ~#@,  !@$~ ,$@-    $@;   !@! @@: !@!   ,#!.     -*-  =:       .=@~ ");
+            Console.WriteLine("                             :@$.      ~@#   ~@$-!@=.,@#.    ~$#,   .$#: ,$@-    =@*   *@: @@: !@!  ;!.       ..   -        ,$@~ ");
+            Console.WriteLine("                             :@#,      .$@$~:#@; !@=.,@#.   ~=!.     -#; ,$@-    -@@*~*@#, @@: !@!       ;;:~~::;!=@#-      -$@~ ");
+            Console.WriteLine("                             :@#~       ,$###$!. !@=.,@#.  -;-       ,;  ,$@-     :$###$-  @@: !@!        *##$$$$$$@@:      ~#@~ ");
+            Console.WriteLine("                             :@@;         -::,   !@=.,@#.  .             ,$@-      .~:-.   @@: !@!        .:,..   .#@-      ;@@~ ");
+            Console.WriteLine("                             :@@*                !@! ,@#.                ,$@-              @@- !@!                .#@-      *@@~ ");
+            Console.WriteLine("                             :@@$,               ;$- ,@#                 ,$#,              @*  !@;                .#@-     -$@@~ ");
+            Console.WriteLine("                             :@@@;               ;;. ,@;                 ,=;.              #,  ;$-                .#@-     ;@@@~ ");
+            Console.WriteLine("                             :@@@$-              ~,  ,#.                 .!-               *   :!                 .#*.    -$@@@~ ");
+            Console.WriteLine("                             :@@@@*,             .   .*                  .~.               ,   -~                 .=.    ,*@@@@~ ");
+            Console.WriteLine("                             ,::::~,                  ,                                                            ,     .~::::. ");
+
+            Console.Write("\n\n\n");
+            Empty(69);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("< < 시 작 하 기 > >");
+            Console.Write("\n");
+            Empty(69);
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.WriteLine("< < 종 료 하 기 > >\n\n\n\n\n\n");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            for (int i = 0; i < 156; i++) Console.Write("-");
+            Console.WriteLine("\n W , S / ↑ , ↓ 로  이 동   |   스 페 이 스 바 로  선 택");
+            Console.WriteLine("제작 - 6팀 : 강민기, 김준표, 유근영, 정영도");
+        }
         static void Story()
             {
                 Console.Clear();
@@ -187,7 +321,7 @@ namespace _6equal0
                 while (name == "")
                     name = Console.ReadLine();
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
 
                 Lobby lob = new Lobby(name);
                 lob.LobbyMenu();
