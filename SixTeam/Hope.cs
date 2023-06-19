@@ -6,7 +6,7 @@ namespace SixTeam
 {
     class Hope
     {
-        static int[] SelectPlayer = new int[2];
+        static int[] SelectPlayer = new int[3];
         public int playerCount;
         int i = 0;
         public int[] randChar;
@@ -20,13 +20,13 @@ namespace SixTeam
         public void Welcome()
         {
             HashSet<int> playerCounts = new HashSet<int>();
-            while (playerCounts.Count < 3)
+            while (playerCounts.Count < 5)
             {
                 i++;
                 playerCount = rand.Next(1, 22);
                 playerCounts.Add(playerCount);
             }
-            foreach(var item in playerCounts)
+            foreach (var item in playerCounts)
             {
                 player_number.Add(item);
             }
@@ -36,15 +36,18 @@ namespace SixTeam
             }
         }
 
-        public static void Select_player()
+        public static void Select_Player()
         {
             Hope hope = new Hope();
             Console.WriteLine("캐릭터를 선택하세요!\n");
             hope.Welcome();
             Console.WriteLine("\n캐릭터의 번호를 입력해주세요!");
 
-            for (int i = 0; i <= 1;)
+            for (int i = 0; i < 3;)
             {
+                if (i == 3)
+                    break;
+
                 int char_num;
                 bool isValidInput = false;
 
@@ -56,7 +59,7 @@ namespace SixTeam
                     {
                         if (hope.player_number.Contains(char_num))
                         {
-                            if (char_num == SelectPlayer[0])
+                            if (IsCharacterSelected(char_num))
                             {
                                 Console.WriteLine("이미 선택한 캐릭터입니다!");
                             }
@@ -79,8 +82,25 @@ namespace SixTeam
                     }
                 }
             }
-            Console.WriteLine(SelectPlayer[0]);
-            Console.WriteLine(SelectPlayer[1]);
+
+            foreach (Player item in Player.players)
+            {
+                if (item.prikey == SelectPlayer[0] || item.prikey == SelectPlayer[1] || item.prikey == SelectPlayer[2])
+                    item.Push();
+            }
+        }
+
+        public static bool IsCharacterSelected(int characterNumber)
+        {
+            foreach (int selectedCharacter in SelectPlayer)
+            {
+                if (selectedCharacter == characterNumber)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

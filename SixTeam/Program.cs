@@ -27,6 +27,10 @@ namespace SixTeam
             Player player19 = new Player("정영도", 8, 4, 8);
             Player player20 = new Player("최강호", 8, 8, 8);
             Player player21 = new Player("홍상화", 3, 12, 5);
+
+            Hope.Select_Player();
+
+            Cmd.Command();
         }
     }
 }
