@@ -19,7 +19,7 @@ namespace Chumma
         public void Welcome()
         {
             HashSet<int> playerCounts = new HashSet<int>();
-            while (playerCounts.Count < 3)
+            while (playerCounts.Count < 5)
             {
                 i++;
                 playerCount = rand.Next(1, 22);
