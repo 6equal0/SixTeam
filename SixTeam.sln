@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6equal0", "6equal0\6equal0.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minki", "Minki\Minki.csproj", "{21F20AC1-8864-4045-A71B-2A1E00181BB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chumma", "Chumma\Chumma.csproj", "{5A8FBE58-1437-4692-B73D-D238A81D96FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chumma", "Chumma\Chumma.csproj", "{5A8FBE58-1437-4692-B73D-D238A81D96FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Junpyo", "Junpyo\Junpyo.csproj", "{73BD31B7-C4AA-4CDF-86E4-E298A1CFF524}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5A8FBE58-1437-4692-B73D-D238A81D96FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8FBE58-1437-4692-B73D-D238A81D96FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A8FBE58-1437-4692-B73D-D238A81D96FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73BD31B7-C4AA-4CDF-86E4-E298A1CFF524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73BD31B7-C4AA-4CDF-86E4-E298A1CFF524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73BD31B7-C4AA-4CDF-86E4-E298A1CFF524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73BD31B7-C4AA-4CDF-86E4-E298A1CFF524}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
