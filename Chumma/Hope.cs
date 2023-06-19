@@ -7,21 +7,18 @@ namespace Chumma
     class Hope
     {
         public int playerCount;
-        int i;
+        int i = 0;
         public int[] randChar;
         public List<int> player_number = new List<int>();
-
         Random rand = new Random();
         int count = 0;
         public string[] name = { "강민기", "강윤구","권도현", "김대현", "김민재", "김아윤",
                                 "김준표", "김진현", "노병민",
                                 "박영준", "심하나", "오윤성", "유근영", "윤서진",
                                 "이승준", "이정빈", "이지우", "장서윤", "정영도", "최강호","홍상화"};
-
         public void Welcome()
         {
             HashSet<int> playerCounts = new HashSet<int>();
-
             while (playerCounts.Count < 3)
             {
                 i++;
@@ -32,13 +29,9 @@ namespace Chumma
             {
                 player_number.Add(item);
             }
-            for(int j=0; j <3; j++)
-            {
-                Console.WriteLine($"{player_number[j]} 랜덤값 여기에 담기다\n");
-            }
             foreach (int playerCount in playerCounts)
             {
-                Console.WriteLine($"[{playerCount}]{name[playerCount - 1]}");
+                Console.WriteLine($"[{playerCount}]{name[playerCount - 1]}\n");
             }
         }
     }
