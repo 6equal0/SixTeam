@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Minki
+namespace SixTeam
 {
     class Player
     {
@@ -44,6 +44,8 @@ namespace Minki
             this.defensive = defensive;
 
             activeSkill = Skills.Skilll(name);
+
+            Push();
         }
 
         public void SetPos(int pos = 0)
