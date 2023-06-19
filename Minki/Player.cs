@@ -44,6 +44,8 @@ namespace Minki
             this.defensive = defensive;
 
             activeSkill = Skills.Skilll(name);
+
+            Push();
         }
 
         public void SetPos(int pos = 0)
