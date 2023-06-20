@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Minki
+namespace SixTeam
 {
     class Player
     {
         public static List<Player> players = new List<Player>();
+        public static List<Player> unequipPlayers = new List<Player>();
         public static List<Player> frontPlayers = new List<Player>();
         public static List<Player> backPlayers = new List<Player>();
 
         public static int AttackNum { get; set; }
+        public static int primaryKey = 1;
 
+        public int prikey;
         public string name;
         public delegate void ActiveSkill(string name);
         internal int hp;
@@ -34,8 +37,6 @@ namespace Minki
 
         public int Hp { get => hp; set => hp = (int)MathF.Max(0, value); }
 
-        public Player() { }
-
         public Player(string name, int hp, int power, int defensive)
         {
             this.name = name;
@@ -43,9 +44,12 @@ namespace Minki
             this.power = power;
             this.defensive = defensive;
 
-            activeSkill = Skills.Skilll(name);
+            unequipPlayers.Add(this);
 
-            Push();
+            prikey = primaryKey;
+            primaryKey++;
+
+            activeSkill = Skills.Skilll(name);
         }
 
         public void SetPos(int pos = 0)
