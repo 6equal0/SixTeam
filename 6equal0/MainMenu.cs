@@ -9,6 +9,7 @@ namespace _6equal0
 {
     class MainMenu
     {
+        public bool AlreadyStory = false;
         public static void beepStart()
         {
             while (true)
@@ -302,23 +303,73 @@ namespace _6equal0
             {
                 Console.Clear();
 
+                bool Skip = false;
+                var ThreadHandller = new Thread(() =>
+                {
+                    while (true)
+                    {
+                        ConsoleKeyInfo mikey;
+                        try
+                        {
+                            mikey = Console.ReadKey(true);
+                        }
+                        catch (ThreadInterruptedException e)
+                        {
+                            return;
+                        }
+
+                        if (mikey.Key == ConsoleKey.Spacebar)
+                            Skip = true;
+                    }
+                });
+                ThreadHandller.Start();
+
+                string[] Chats = {
+                "<< 스페이스를 누르면 스킵 할 수 있습니다. >>\n\n",
+                    "옛날 옛날 먼 옛날.. 모든 바다 위를 공평하게 약탈한 전설의 해적이 있었다...\n\n" ,
+                    "그 해적은 바다 위 모든 것을 약탈 한 나머지 약탈 할 것이 아무것도 없었다...\n\n",
+                    "그래서 그는 바다 아래를 약탈하기로 했다...\n\n",
+                    "그렇다..\n\n",
+                    "당신이 바로 그 전설의 해적이었던 것이다!!\n\n",
+                    "바다 아래에 공포를 퍼뜨릴 당신의 이름은..?\n\n\n\n\n\n\n\n\n"
+                };
+
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Texting("옛날 옛날 먼 옛날.. 모든 바다 위를 공평하게 약탈한 전설의 해적이 있었다...\n\n", 30);
-                Thread.Sleep(1500);
+                int TimeUp = 0;
+                int ChatCount = 0;
+                foreach (var chat in Chats)
+                {
+                    ChatCount++;
+                    TimeUp = 0;
+                    Texting(chat, 30);
+                    while (TimeUp < 150 && !Skip && ChatCount < Chats.Length-1)
+                    {
+                        Thread.Sleep(1);
+                        TimeUp++;
+                    }
 
-                Texting("그 해적은 바다 위 모든 것을 약탈 한 나머지 약탈 할 것이 아무것도 없었다...\n\n", 30);
-                Thread.Sleep(1500);
+                    if (Skip)
+                    {
+                        ThreadHandller.Interrupt();
+                        break;
+                    }
+                }
 
-                Texting("그래서 그는 바다 아래를 약탈하기로 했다...\n\n", 30);
-                Thread.Sleep(1500);
+                //Thread.Sleep(1500);
 
-                Texting("그렇다..\n\n", 30);
-                Thread.Sleep(1500);
+                //Texting("그 해적은 바다 위 모든 것을 약탈 한 나머지 약탈 할 것이 아무것도 없었다...\n\n", 30);
+                //Thread.Sleep(1500);
 
-                Texting("당신이 바로 그 전설의 해적이었던 것이다!!\n\n", 30);
-                Thread.Sleep(1500);
+                //Texting("그래서 그는 바다 아래를 약탈하기로 했다...\n\n", 30);
+                //Thread.Sleep(1500);
 
-                Texting("바다 아래에 공포를 퍼뜨릴 당신의 이름은..?\n\n\n\n\n\n\n\n\n", 30);
+                //Texting("그렇다..\n\n", 30);
+                //Thread.Sleep(1500);
+
+                //Texting("당신이 바로 그 전설의 해적이었던 것이다!!\n\n", 30);
+                //Thread.Sleep(1500);
+
+                //Texting("바다 아래에 공포를 퍼뜨릴 당신의 이름은..?\n\n\n\n\n\n\n\n\n", 30);
 
                 Console.Write("당신의 이름을 입력해주세요: ");
                 string name = "";
