@@ -181,7 +181,37 @@ namespace SixTeam
             Console.Write(" / 방어력: ");
             TextOptions.TextColor(ConsoleColor.DarkCyan, defensive.ToString());
             Console.WriteLine();
+            if (activeSkill != Skills.Default)
+            {
+                TextOptions.TextColor(ConsoleColor.Cyan, "스킬 : ");
+                Console.WriteLine(ShowSkill(name));
+            }
             Console.WriteLine("------------------------------------");
+        }
+
+        public string ShowSkill(string name)
+        {
+            switch (name)
+            {
+                case "강윤구":
+                    return "2명에게 1.2배로 공격";
+                case "권도현":
+                    return "적 전체 1턴동안 스턴";
+                case "김준표":
+                    return "3턴 뒤 자폭하며 적 1명을 데려감";
+                case "박영준":
+                    return "팀원의 체력을 4 회복";
+                case "오윤성":
+                    return "2턴동안 무적";
+                case "이지우":
+                    return "공격력을 모두 소진하여 체력에 더함";
+                case "최강호":
+                    return "체력을 2 소모하여 공격력 3 상승";
+                case "홍상화":
+                    return "체력을 2 회복하고 1턴동안 무적";
+            }
+
+            return "";
         }
 
         public void Push()
