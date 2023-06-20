@@ -6,6 +6,7 @@ namespace SixTeam
     {
         static void Main(string[] args)
         {
+            #region 플레이어
             Player player1 = new Player("강민기", 5, 7, 5);
             Player player2 = new Player("강윤구", 6, 4, 8);
             Player player3 = new Player("권도현", 2, 15, 2);
@@ -27,10 +28,37 @@ namespace SixTeam
             Player player19 = new Player("정영도", 8, 4, 8);
             Player player20 = new Player("최강호", 8, 8, 8);
             Player player21 = new Player("홍상화", 3, 12, 5);
+            #endregion
+            #region 몬스터
+            Monster monster11 = new Monster("정어리 검사", 5, 7, 1);
+            Monster monster12 = new Monster("조개 보병", 4, 12, 1);
+            Monster monster13 = new Monster("크릴새우 패거리", 6, 3, 1);
 
-            Hope.Select_Player();
+            Monster monster21 = new Monster("흰동가리 마법사", 7, 5, 2);
+            Monster monster22 = new Monster("굴 중보병", 5, 16, 2);
+            Monster monster23 = new Monster("고등어 전사", 8, 9, 2);
+            Monster monster24 = new Monster("해삼 돌격병", 6, 10, 2);
 
-            Cmd.Command();
+            Monster monster31 = new Monster("미꾸라지 검사", 9, 6, 3);
+            Monster monster32 = new Monster("장어 병사", 6, 15, 3);
+            Monster monster33 = new Monster("피라냐 암살자", 9, 5, 3);
+            Monster monster34 = new Monster("돛사치 기사", 4, 16, 3);
+            Monster monster35 = new Monster("방어 갑옷기사", 2, 23, 3);
+
+            Monster monster41 = new Monster("청새치 군사", 7, 13, 4);
+            Monster monster42 = new Monster("백상아리 장군", 12, 15, 4);
+            Monster monster43 = new Monster("가자미 패거리", 6, 10, 4);
+            Monster monster44 = new Monster("용감한 개복치", 3, 5, 4);
+            Monster monster45 = new Monster("참다랑어 마법사", 8, 4, 4);
+
+            Monster monster51 = new Monster("문어 수도승", 11, 11, 5);
+            Monster monster52 = new Monster("꽃게 중보병", 8, 20, 5);
+            Monster monster53 = new Monster("백상아리 전차", 13, 7, 5);
+
+            Monster boss = new Monster("크라켄", 14, 50, 5, true);
+            #endregion
+
+            MainMenu.Question();
         }
     }
 }
