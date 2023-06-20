@@ -7,7 +7,7 @@ namespace Chumma
     class Hope
     {
         public int playerCount;
-        int i = 0;
+       
         public int[] randChar;
         public List<int> player_number = new List<int>();
         Random rand = new Random();
@@ -21,7 +21,7 @@ namespace Chumma
             HashSet<int> playerCounts = new HashSet<int>();
             while (playerCounts.Count < 5)
             {
-                i++;
+                
                 playerCount = rand.Next(1, 22);
                 playerCounts.Add(playerCount);
             }
