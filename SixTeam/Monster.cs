@@ -10,36 +10,79 @@ namespace SixTeam
     class Monster
     {
         public static List<Monster> monsters = new List<Monster>();
+        public static List<Monster> monsters1 = new List<Monster>();
+        public static List<Monster> monsters2 = new List<Monster>();
+        public static List<Monster> monsters3 = new List<Monster>();
+        public static List<Monster> monsters4 = new List<Monster>();
+        public static List<Monster> monsters5 = new List<Monster>();
+        public static Monster bosss;
 
         static Random random = new Random();
 
         public string name;
         private int hp;
         private int power;
+        private int turn;
         private bool boss = false;
         public bool isStun = false;
 
         public int Hp { get => hp; set => hp = (int)MathF.Max(0, value); }
 
-        public Monster(string name, int hp, int power, bool boss = false)
+        public Monster(string name, int hp, int power, int turn, bool boss = false)
         {
             this.name = name;
             Hp = hp;
             this.power = power;
+            this.turn = turn;
             this.boss = boss;
 
-            Push();
+            if (!boss)
+                switch (turn)
+                {
+                    case 1:
+                        monsters1.Add(this);
+                        break;
+                    case 2:
+                        monsters2.Add(this);
+                        break;
+                    case 3:
+                        monsters3.Add(this);
+                        break;
+                    case 4:
+                        monsters4.Add(this);
+                        break;
+                    case 5:
+                        monsters5.Add(this);
+                        break;
 
-            if (boss)
-                TextOptions.TextColor(ConsoleColor.Red, "Boss: " + this.name);
+                }
             else
-                TextOptions.TextColor(ConsoleColor.Red, this.name);
-            Console.WriteLine($"(이)가 생성되었습니다.");
-            Console.WriteLine("------------------------------------");
+                bosss = this;
+
         }
 
         public void Attack(List<Player> players)
         {
+            if (boss)
+            {
+                if(hp <= 10)
+                {
+                    BossAttack4();
+                }
+                switch (random.Next(1, 4))
+                {
+                    case 1:
+                        BossAttack1(players);
+                        return;
+                    case 2:
+                        BossAttack2(players);
+                        return;
+                    case 3:
+                        BossAttack3();
+                        return;
+                }
+            }
+
             if (!isStun)
             {
                 int min = 100;
@@ -86,7 +129,7 @@ namespace SixTeam
             }
         }
 
-        public void BossAttack(List<Player> players)
+        public void BossAttack1(List<Player> players)
         {
             int min = 100;
             List<Player> minPlys = new List<Player>();
@@ -166,6 +209,61 @@ namespace SixTeam
             {
                 Console.WriteLine("-------------------Error-------------------");
             }
+        }
+        public void BossAttack2(List<Player> players)
+        {
+            int min = 100;
+            List<Player> minPlys = new List<Player>();
+            foreach (Player item in players)
+            {
+                if (item.Hp == min)
+                {
+                    minPlys.Add(item);
+                }
+                else if (item.Hp <= min)
+                {
+                    minPlys.Clear();
+                    minPlys.Add(item);
+                    min = item.Hp;
+                }
+            }
+
+            Player player = minPlys[random.Next(minPlys.Count - 1)];
+
+            TextOptions.TextColor(ConsoleColor.Red, name);
+            Console.Write("(이)가 ");
+            TextOptions.TextColor(ConsoleColor.Green, player.name);
+            Console.WriteLine("을(를) 공격했습니다.");
+            Thread.Sleep(800);
+
+            if (player.position == 1)
+            {
+                player.Damaged(power - player.defensive);
+            }
+            else if (player.position == 0)
+            {
+                player.Damaged(power);
+            }
+            else
+            {
+                Console.WriteLine("-------------------Error-------------------");
+            }
+        }
+        public void BossAttack3()
+        {
+            TextOptions.TextColor(ConsoleColor.Red, name);
+            Console.WriteLine("(이)가 체력을 3 회복합니다.");
+            Thread.Sleep(800);
+
+            hp += 3;
+        }
+        public void BossAttack4()
+        {
+            TextOptions.TextColor(ConsoleColor.Red, name);
+            Console.WriteLine("(이)가 기괴한 꿈틀거림으로 체력을 15 회복합니다.");
+            Thread.Sleep(1800);
+
+            hp += 15;
         }
 
         public void Damaged(int damage)

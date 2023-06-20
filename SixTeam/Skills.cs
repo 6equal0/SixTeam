@@ -100,14 +100,13 @@ namespace SixTeam
         {
             if (!player.isAttack)
             {
-                Monster tar = Monster.monsters[rand.Next(0, Monster.monsters.Count)];
+                foreach(Monster item in Monster.monsters)
+                {
+                    item.Stun();
+                }
 
                 TextOptions.TextColor(ConsoleColor.Green, player.name);
-                Console.Write("이 ");
-                TextOptions.TextColor(ConsoleColor.Red, tar.name);
-                Console.WriteLine("을(를) 해킹했습니다.");
-
-                tar.Stun();
+                Console.WriteLine("이 적 모두를 해킹했습니다.");
 
                 player.isAttack = true;
             }
@@ -176,6 +175,7 @@ namespace SixTeam
             if (!player.isAttack)
             {
                 player.hp += player.power;
+                player.plusPower = -player.power;
 
                 TextOptions.TextColor(ConsoleColor.Green, player.name);
                 Console.WriteLine("가 공격력을 모두 체력으로 변환시켰습니다.");
@@ -228,7 +228,7 @@ namespace SixTeam
             }
         }
 
-        static void Default(Player player)
+        public static void Default(Player player)
         {
             TextOptions.TextColor(ConsoleColor.Green, player.name);
             Console.WriteLine("(은)는 스킬이 없는 플레이어입니다.");

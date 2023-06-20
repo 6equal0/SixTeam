@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace SixTeam
 {
@@ -8,11 +9,9 @@ namespace SixTeam
     {
         static int[] SelectPlayer = new int[3];
         public int playerCount;
-        int i = 0;
-        public int[] randChar;
+        private int i;
         public List<int> player_number = new List<int>();
         Random rand = new Random();
-        int count = 0;
         public string[] name = { "강민기", "강윤구","권도현", "김대현", "김민재", "김아윤",
                                 "김준표", "김진현", "노병민",
                                 "박영준", "심하나", "오윤성", "유근영", "윤서진",
@@ -28,11 +27,20 @@ namespace SixTeam
             }
             foreach (var item in playerCounts)
             {
+                Player player = null;
+
+                foreach(Player ply in Player.unequipPlayers)
+                {
+                    if(item == ply.prikey)
+                    {
+                        player = ply;
+                        break;
+                    }
+                }
+
                 player_number.Add(item);
-            }
-            foreach (int playerCount in playerCounts)
-            {
-                Console.WriteLine($"[{playerCount}]{name[playerCount - 1]}\n");
+
+                Console.WriteLine($"[{item}]{name[item - 1]:D2} 체력: {player.hp} | 공격력: {player.power} | 방어력: {player.defensive} {(player.ShowSkill(player.name) == "" ? "" : $"스킬: player.ShowSkill(player.name)")}\n");
             }
         }
 
@@ -83,11 +91,23 @@ namespace SixTeam
                 }
             }
 
-            foreach (Player item in Player.players)
+            foreach (Player item in Player.unequipPlayers)
             {
                 if (item.prikey == SelectPlayer[0] || item.prikey == SelectPlayer[1] || item.prikey == SelectPlayer[2])
                     item.Push();
             }
+
+            Console.WriteLine();
+            if(Player.players.Count == 3)
+                Console.WriteLine("\n\n모두 무사히 합류했습니다.\n");
+            else
+                Console.WriteLine("Error");
+
+            Thread.Sleep(1200);
+            Console.ForegroundColor = ConsoleColor.White;
+            Cmd.batComplete = false;
+            Console.WriteLine("배치를 시작합니다.\n");
+            Cmd.BatchCmd();
         }
 
         public static bool IsCharacterSelected(int characterNumber)
