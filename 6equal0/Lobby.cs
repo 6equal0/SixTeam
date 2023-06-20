@@ -49,8 +49,9 @@ namespace _6equal0
 
             MainMenu.Texting($"< 약 탈 하 러  가 기 >\n\n", 30);
             MainMenu.Texting($"   < 강 화 하 기 >\n\n", 30);
-            MainMenu.Texting($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", 30);
+            MainMenu.Texting($"< 메 인 화 면 으 로 >", 30);
 
+            Console.Write("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             Console.ForegroundColor = ConsoleColor.DarkGray;
             for (int i = 0; i < 156; i++) Console.Write("-");
             Console.WriteLine("\n W , S / ↑ , ↓ 로  이 동   |   스 페 이 스 바 로  선 택");
@@ -129,7 +130,7 @@ namespace _6equal0
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Write($"   < 강 화 하 기 >\n\n");
-            Console.Write($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.Write($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             for (int i = 0; i < 156; i++) Console.Write("-");
@@ -163,7 +164,7 @@ namespace _6equal0
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.Write($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             for (int i = 0; i < 156; i++) Console.Write("-");
@@ -195,7 +196,7 @@ namespace _6equal0
 
             Console.ForegroundColor = ConsoleColor.Black;
             Console.BackgroundColor = ConsoleColor.Gray;
-            Console.Write($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.Write($"< 메 인 화 면 으 로 >\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Gray;
 

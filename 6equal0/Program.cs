@@ -7,7 +7,8 @@ namespace _6equal0
     {
         static void Main(string[] args)
         {
-            MainMenu.Question();
+            Chunma222222222.Select_Player()
+            //MainMenu.Question();
         }
     }
 }
