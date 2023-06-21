@@ -186,7 +186,7 @@ namespace SixTeam
             if (!player.isAttack)
             {
                 player.hp += player.power;
-                player.plusPower = -player.power;
+                player.power = 0;
 
                 TextOptions.TextColor(ConsoleColor.Green, player.name);
                 Console.WriteLine("가 공격력을 모두 체력으로 변환시켰습니다.");

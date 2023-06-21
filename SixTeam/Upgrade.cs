@@ -18,8 +18,11 @@ namespace SixTeam
                     Console.WriteLine($"업그레이드 가능 횟수를 초과했습니다. 업그레이드 가능 횟수: {upgradeNum}");
                 else if (value >= 1 && value <= 5)
                 {
-                    player.power += value;
+                    player.defPower += value;
                     Console.WriteLine($"{player.name}의 공격력이 {value}만큼 증가했습니다.");
+                    upgradeNum -= value;
+
+                    player.power = player.defPower;
                 }
                 else
                 {
@@ -34,6 +37,7 @@ namespace SixTeam
                 {
                     player.defensive += value;
                     Console.WriteLine($"{player.name}의 방어력이 {value}만큼 증가했습니다.");
+                    upgradeNum -= value;
                 }
                 else
                 {
@@ -46,8 +50,11 @@ namespace SixTeam
                     Console.WriteLine($"업그레이드 가능 횟수를 초과했습니다. 업그레이드 가능 횟수: {upgradeNum}");
                 else if (value >= 1 && value <= 5)
                 {
-                    player.Hp += value;
+                    player.defHp += value;
                     Console.WriteLine($"{player.name}의 체력이 {value}만큼 증가했습니다.");
+                    upgradeNum -= value;
+
+                    player.Hp = player.defHp;
                 }
                 else
                 {

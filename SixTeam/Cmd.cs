@@ -213,7 +213,18 @@ namespace SixTeam
                 Thread.Sleep(500);
                 foreach (Monster item in Monster.monsters)
                 {
-                    item.Attack(Player.frontPlayers.Count != 0 ? Player.frontPlayers : Player.backPlayers);
+                    if(Player.frontPlayers.Count == 0)
+                    {
+                        item.Attack(Player.backPlayers);
+                    }
+                    else if(Player.frontPlayers.Count > 0)
+                    {
+                        item.Attack(Player.frontPlayers);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error");
+                    }
                 }
                 turn++;
                 foreach(Player item in Player.players)
@@ -242,7 +253,7 @@ namespace SixTeam
             {
                 TextOptions.TextColor(ConsoleColor.DarkGreen, "승리하였습니다.");
 
-                if (stage > 0)//rand.Next(1, 4))
+                if (stage > rand.Next(1, 4))
                 {
                     for (int i = Player.players.Count - 1; i >= 0; i--)
                     {
@@ -251,7 +262,8 @@ namespace SixTeam
                         Thread.Sleep(1000);
                     }
 
-                    Thread.Sleep(10000);
+                    Console.WriteLine("로비로 돌아갑니다.");
+                    Thread.Sleep(500);
 
                     Lobby.day++;
                     Upgrade.upgradeNum += 3;
@@ -264,6 +276,11 @@ namespace SixTeam
                 else
                 {
                     stage++;
+
+                    foreach(Player player in Player.players)
+                    {
+                        player.skillable = true;
+                    }
 
                     Console.WriteLine("\n계속하려면 Enter를 입력해주세요.");
                     Console.ReadLine();
@@ -518,6 +535,19 @@ namespace SixTeam
                 if (item.name == name)
                     return true;
             }
+
+            foreach(Player item in Player.frontPlayers)
+            {
+                if (item.name == name)
+                    return true;
+            }
+
+            foreach (Player item in Player.backPlayers)
+            {
+                if (item.name == name)
+                    return true;
+            }
+
             return false;
         }
 

@@ -20,14 +20,15 @@ namespace SixTeam
         public int prikey;
         public string name;
         public delegate void ActiveSkill(string name);
-        private int defHp;
+        public int defHp;
         internal int hp;
-        private int defPower;
+        public int defPower;
         internal int power;
         public int plusPower = 0;
         public int defensive;
         public int position = -1;
         internal bool isAttack = false;
+        public bool skillable = true;
         public bool isInv = false;
         public int invTurn;
         public int boomTurn = -1;
@@ -116,7 +117,16 @@ namespace SixTeam
 
         public void Skill()
         {
-            activeSkill(this);
+            if (skillable)
+            {
+                activeSkill(this);
+
+                skillable = false;
+            }
+            else
+            {
+                Console.WriteLine("이미 스킬을 사용하였습니다.");
+            }
         }
 
         public void Damaged(int damage)
