@@ -254,6 +254,7 @@ namespace SixTeam
                     Thread.Sleep(10000);
 
                     Lobby.day++;
+                    Upgrade.upgradeNum += 3;
 
                     Console.WriteLine("\n계속하려면 Enter를 입력해주세요.");
                     Console.ReadLine();

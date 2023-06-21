@@ -8,11 +8,15 @@ namespace SixTeam
 {
     class Upgrade
     {
+        public static int upgradeNum = 3;
+        
         public static void Enhance(Player player, string stat, int value)
         {
             if (stat == "공격력")
             {
-                if (value >= 1 && value <= 5)
+                if(value > upgradeNum)
+                    Console.WriteLine($"업그레이드 가능 횟수를 초과했습니다. 업그레이드 가능 횟수: {upgradeNum}");
+                else if (value >= 1 && value <= 5)
                 {
                     player.power += value;
                     Console.WriteLine($"{player.name}의 공격력이 {value}만큼 증가했습니다.");
@@ -24,7 +28,9 @@ namespace SixTeam
             }
             else if (stat == "방어력")
             {
-                if (value >= 1 && value <= 5)
+                if (value > upgradeNum)
+                    Console.WriteLine($"업그레이드 가능 횟수를 초과했습니다. 업그레이드 가능 횟수: {upgradeNum}");
+                else if (value >= 1 && value <= 5)
                 {
                     player.defensive += value;
                     Console.WriteLine($"{player.name}의 방어력이 {value}만큼 증가했습니다.");
@@ -36,7 +42,9 @@ namespace SixTeam
             }
             else if (stat == "체력")
             {
-                if (value >= 1 && value <= 5)
+                if (value > upgradeNum)
+                    Console.WriteLine($"업그레이드 가능 횟수를 초과했습니다. 업그레이드 가능 횟수: {upgradeNum}");
+                else if (value >= 1 && value <= 5)
                 {
                     player.Hp += value;
                     Console.WriteLine($"{player.name}의 체력이 {value}만큼 증가했습니다.");
@@ -56,6 +64,8 @@ namespace SixTeam
         public static void EnchantQ()
         {
             PlayerTask:
+            Console.WriteLine($"업그레이드 가능 횟수: {upgradeNum}\n");
+
             Console.WriteLine("강화할 캐릭터를 선택하세요");
             string pInst = Console.ReadLine();
             if (!Cmd.CheckAllP(pInst))
