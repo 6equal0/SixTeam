@@ -11,6 +11,7 @@ namespace SixTeam
     class Cmd
     {
         public static int turn = 0;
+        public static int stage = 1;
         public static bool batComplete = false;
 
         static string yn = "";
@@ -34,11 +35,12 @@ namespace SixTeam
                     ShowStat(inst);
                     break;
                 case "/?":
-                    Console.WriteLine("/배치 [대상] [전열, 후열]\n/배치완료\n/능력치 [대상]");
+                    Console.WriteLine("/배치 [대상] [전열, 후열]\n/배치완료\n/능력치 [대상]\n");
+                    BatchCmd();
                     break;
                 default:
                     ErrorMsg("명령어");
-                    Command();
+                    BatchCmd();
                     return;
             }
         }
@@ -64,7 +66,8 @@ namespace SixTeam
                     Spectate(inst);
                     break;
                 case "/?":
-                    Console.WriteLine("/공격 [대상] [대상]\n/스킬 [대상]\n/능력치 [대상]\n/관찰 [대상]");
+                    Console.WriteLine("/공격 [대상] [대상]\n/스킬 [대상]\n/능력치 [대상]\n/관찰 [대상]\n");
+                    Command();
                     break;
                 default:
                     ErrorMsg("명령어");
@@ -110,10 +113,6 @@ namespace SixTeam
         private static void BossStart()
         {
             Monster.monsters.Add(Monster.bosss);
-            for (int i = 0; i < 3; i++)
-            {
-                Monster.monsters.Add(Monster.monsters5[rand.Next(0, Monster.monsters5.Count)]);
-            }
 
             while (Player.players.Count != 0 && Monster.monsters.Count != 0)
             {
@@ -125,6 +124,7 @@ namespace SixTeam
                     if (Player.AttackNum >= Player.backPlayers.Count)
                         break;
                 }
+                Player.AttackNum = 0;
                 foreach (Player item in Player.backPlayers)
                 {
                     item.ResetAttack();
@@ -133,7 +133,7 @@ namespace SixTeam
                 Thread.Sleep(500);
                 foreach (Monster item in Monster.monsters)
                 {
-                    item.Attack(Player.frontPlayers);
+                    item.Attack(Player.frontPlayers.Count != 0 ? Player.frontPlayers : Player.backPlayers);
                     item.isStun = false;
                 }
                 turn++;
@@ -157,41 +157,50 @@ namespace SixTeam
         {
             turn = 0;
 
-            if (Lobby.day == 5)
+            Console.Clear();
+
+            if (Lobby.day == 5 && turn == stage)
             {
+                Console.WriteLine($"{Lobby.day}일차 보스 스테이지");
+
                 BossStart();
                 return;
             }
-            switch (Lobby.day)
+
+            Console.WriteLine($"{Lobby.day}일차 {stage}번째 스테이지");
+
+            for (int i = 0; i < 3; i++)
             {
-                case 1:
-                    for (int i = 0; i < 3; i++)
-                    {
+                switch (Lobby.day)
+                {
+                    case 1:
                         Monster.monsters.Add(Monster.monsters1[rand.Next(0, Monster.monsters1.Count)]);
-                    }
-                    break;
-                case 2:
-                    for (int i = 0; i < 3; i++)
-                    {
+                        break;
+                    case 2:
                         Monster.monsters.Add(Monster.monsters2[rand.Next(0, Monster.monsters2.Count)]);
-                    }
-                    break;
-                case 3:
-                    for (int i = 0; i < 3; i++)
-                    {
+                        break;
+                    case 3:
                         Monster.monsters.Add(Monster.monsters3[rand.Next(0, Monster.monsters3.Count)]);
-                    }
-                    break;
-                case 4:
-                    for (int i = 0; i < 3; i++)
-                    {
+                        break;
+                    case 4:
                         Monster.monsters.Add(Monster.monsters4[rand.Next(0, Monster.monsters4.Count)]);
-                    }
-                    break;
+                        break;
+                    case 5:
+                        Monster.monsters.Add(Monster.monsters5[rand.Next(0, Monster.monsters5.Count)]);
+                        break;
+                }
             }
+
+            Console.WriteLine();
+            foreach (Player ply in Player.players)
+                ply.ShowStatus();
+            Console.WriteLine();
+            foreach (Monster mon in Monster.monsters)
+                mon.ShowStatus();
 
             do
             {
+                Console.WriteLine($"{turn}번째 턴");
                 Console.WriteLine("공격을 진행해주세요.\n");
                 while (Monster.monsters.Count > 0)
                 {
@@ -204,13 +213,16 @@ namespace SixTeam
                 Thread.Sleep(500);
                 foreach (Monster item in Monster.monsters)
                 {
-                    item.Attack(Player.frontPlayers);
-                    item.isStun = false;
+                    item.Attack(Player.frontPlayers.Count != 0 ? Player.frontPlayers : Player.backPlayers);
                 }
                 turn++;
                 foreach(Player item in Player.players)
                 {
                     item.TurnEnd();
+                }
+                foreach(Monster item in Monster.monsters)
+                {
+                    item.isStun = false;
                 }
             } while (Player.players.Count != 0 && Monster.monsters.Count != 0);
             Thread.Sleep(500);
@@ -218,25 +230,57 @@ namespace SixTeam
             foreach(Player item in Player.players)
             {
                 item.plusPower = 0;
+                item.boomTurn = -1;
+            }
+            foreach(Monster item in Monster.unequipMonsters)
+            {
+                item.Reset();
             }
 
             Console.WriteLine();
             if (Monster.monsters.Count == 0)
             {
-                Lobby.day++;
                 TextOptions.TextColor(ConsoleColor.DarkGreen, "승리하였습니다.");
+
+                if (stage > 0)//rand.Next(1, 4))
+                {
+                    for (int i = Player.players.Count - 1; i >= 0; i--)
+                    {
+                        Player.players[i].Reset();
+                        Player.players[i].Pop();
+                        Thread.Sleep(1000);
+                    }
+
+                    Thread.Sleep(10000);
+
+                    Lobby.day++;
+
+                    Console.WriteLine("\n계속하려면 Enter를 입력해주세요.");
+                    Console.ReadLine();
+
+                    Lobby.LobbyMenu();
+                }
+                else
+                {
+                    stage++;
+
+                    Console.WriteLine("\n계속하려면 Enter를 입력해주세요.");
+                    Console.ReadLine();
+
+                    BattleStart();
+                }
             }
             else if(Player.players.Count == 0)
             {
                 TextOptions.TextColor(ConsoleColor.DarkRed, "패배하였습니다.");
+
+                foreach (Player ply in Player.players)
+                    ply.Pop();
+                foreach (Monster mon in Monster.monsters)
+                    mon.Pop();
+
+                Lobby.LobbyMenu();
             }
-
-            foreach (Player ply in Player.players)
-                ply.Pop();
-            foreach (Monster mon in Monster.monsters)
-                mon.Pop();
-
-            Lobby.LobbyMenu();
         }
 
         static void Attack(string[] inst)
@@ -321,7 +365,7 @@ namespace SixTeam
             else if(!CheckP(inst[1]))
             {
                 ErrorMsg("대상플");
-                Command();
+                BatchCmd();
                 return;
             }
 
@@ -332,7 +376,7 @@ namespace SixTeam
                     if (inst.Length == 2)
                     {
                         Console.WriteLine("올바른 위치를 입력해주세요.\n(전열, 후열)");
-                        Command();
+                        BatchCmd();
                         return;
                     }
                     else if (inst[2] == "전열")
@@ -342,7 +386,7 @@ namespace SixTeam
                     else
                     {
                         Console.WriteLine("올바른 위치를 입력해주세요.\n(전열, 후열)");
-                        Command();
+                        BatchCmd();
                         return;
                     }
                     break;
@@ -368,13 +412,20 @@ namespace SixTeam
                 yn = Console.ReadLine();
                 if (yn == "y")
                 {
+                    if(Player.frontPlayers.Count == 3)
+                    {
+                        Console.WriteLine("전열에 모든 플레이어를 배치할 수 없습니다.");
+                        BatchCmd();
+                        return;
+                    }
+
                     Console.WriteLine("배틀을 시작합니다.");
                     Console.WriteLine();
                 }
                 else if (yn == "n")
                 {
                     Console.WriteLine("배치를 완료하고 와주십시오.");
-                    Command();
+                    BatchCmd();
                     return;
                 }
                 else
@@ -401,11 +452,16 @@ namespace SixTeam
 
                 if (!batComplete)
                     BatchCmd();
+                else
+                    Command();
             }
             else if (!CheckP(inst[1]))
             {
                 ErrorMsg("대상플");
-                Command();
+                if (!batComplete)
+                    BatchCmd();
+                else
+                    Command();
                 return;
             }
 
@@ -419,6 +475,8 @@ namespace SixTeam
 
             if (!batComplete)
                 BatchCmd();
+            else
+                Command();
         }
 
         static void Spectate(string[] inst)

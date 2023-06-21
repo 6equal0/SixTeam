@@ -9,6 +9,7 @@ namespace SixTeam
 {
     class Monster
     {
+        public static List<Monster> unequipMonsters = new List<Monster>();
         public static List<Monster> monsters = new List<Monster>();
         public static List<Monster> monsters1 = new List<Monster>();
         public static List<Monster> monsters2 = new List<Monster>();
@@ -20,6 +21,7 @@ namespace SixTeam
         static Random random = new Random();
 
         public string name;
+        private int defHp;
         private int hp;
         private int power;
         private int turn;
@@ -31,7 +33,7 @@ namespace SixTeam
         public Monster(string name, int hp, int power, int turn, bool boss = false)
         {
             this.name = name;
-            Hp = hp;
+            defHp = hp;
             this.power = power;
             this.turn = turn;
             this.boss = boss;
@@ -59,6 +61,8 @@ namespace SixTeam
             else
                 bosss = this;
 
+            Reset();
+            unequipMonsters.Add(this);
         }
 
         public void Attack(List<Player> players)
@@ -111,7 +115,7 @@ namespace SixTeam
 
                 if (player.position == 1)
                 {
-                    player.Damaged(power - player.defensive);
+                    player.Damaged((int)MathF.Max(0, power - player.defensive));
                 }
                 else if (player.position == 0)
                 {
@@ -186,7 +190,7 @@ namespace SixTeam
 
             if (player1.position == 1)
             {
-                player1.Damaged(power - player1.defensive);
+                player1.Damaged((int)MathF.Max(0, power/2 - player1.defensive));
             }
             else if (player1.position == 0)
             {
@@ -199,7 +203,7 @@ namespace SixTeam
 
             if (player2.position == 1)
             {
-                player2.Damaged(power - player2.defensive);
+                player2.Damaged((int)MathF.Max(0, power/2 - player2.defensive));
             }
             else if (player2.position == 0)
             {
@@ -238,7 +242,7 @@ namespace SixTeam
 
             if (player.position == 1)
             {
-                player.Damaged(power - player.defensive);
+                player.Damaged((int)MathF.Max(0, power - player.defensive));
             }
             else if (player.position == 0)
             {
@@ -317,7 +321,7 @@ namespace SixTeam
                 TextOptions.TextColor(ConsoleColor.Cyan, " ===============\n");
             }
             else
-                Console.WriteLine("------------------------------------");
+                Console.WriteLine("--------------------------------------------");
             Console.Write($"이름: ");
             TextOptions.TextColor(ConsoleColor.DarkYellow, name);
             Console.Write($" / 체력: ");
@@ -331,8 +335,13 @@ namespace SixTeam
                 Console.WriteLine();
             }
             else
-                Console.WriteLine("------------------------------------");
+                Console.WriteLine("--------------------------------------------");
             Console.WriteLine();
+        }
+
+        public void Reset()
+        {
+            Hp = defHp;
         }
 
         public void Push()

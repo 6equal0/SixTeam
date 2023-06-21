@@ -18,6 +18,8 @@ namespace SixTeam
                                 "이승준", "이정빈", "이지우", "장서윤", "정영도", "최강호","홍상화"};
         public void Welcome()
         {
+            Console.ResetColor();
+
             HashSet<int> playerCounts = new HashSet<int>();
             while (playerCounts.Count < 5)
             {
@@ -40,22 +42,19 @@ namespace SixTeam
 
                 player_number.Add(item);
 
-                Console.WriteLine($"[{item}]{name[item - 1]:D2} 체력: {player.hp} | 공격력: {player.power} | 방어력: {player.defensive} {(player.ShowSkill(player.name) == "" ? "" : $"스킬: player.ShowSkill(player.name)")}\n");
+                MainMenu.Texting($"[{item}]{name[item - 1]:D2} 체력: {player.hp} | 공격력: {player.power} | 방어력: {player.defensive} {(player.ShowSkill(player.name) == "" ? "" : $"스킬: {player.ShowSkill(player.name)}")}\n", 10);
             }
         }
 
         public static void Select_Player()
         {
             Hope hope = new Hope();
-            Console.WriteLine("캐릭터를 선택하세요!\n");
+            MainMenu.Texting("캐릭터를 선택하세요!\n\n", 20);
             hope.Welcome();
-            Console.WriteLine("\n캐릭터의 번호를 입력해주세요!");
+            MainMenu.Texting("\n\n캐릭터의 번호를 입력해주세요!\n\n", 20);
 
             for (int i = 0; i < 3;)
             {
-                if (i == 3)
-                    break;
-
                 int char_num;
                 bool isValidInput = false;
 
@@ -69,11 +68,11 @@ namespace SixTeam
                         {
                             if (IsCharacterSelected(char_num))
                             {
-                                Console.WriteLine("이미 선택한 캐릭터입니다!");
+                                MainMenu.Texting("이미 선택한 캐릭터입니다!\n", 10);
                             }
                             else
                             {
-                                Console.WriteLine($"{hope.name[char_num - 1]}를 선택하셨습니다!");
+                                MainMenu.Texting($"{hope.name[char_num - 1]}를 선택하셨습니다!\n\n", 10);
                                 SelectPlayer[i] = char_num;
                                 i++;
                                 isValidInput = true;
@@ -81,15 +80,15 @@ namespace SixTeam
                         }
                         else
                         {
-                            Console.WriteLine("그는 아직 술집에 오지 않았습니다");
+                            MainMenu.Texting("그는 아직 술집에 오지 않았습니다\n\n", 10);
                         }
                     }
                     else
                     {
-                        Console.WriteLine("숫자를 입력해주세요!");
+                        MainMenu.Texting("범위 안에 숫자를 입력해주세요!(1~21)\n\n", 10);
                     }
                 }
-            }
+        }
 
             foreach (Player item in Player.unequipPlayers)
             {
@@ -98,15 +97,26 @@ namespace SixTeam
             }
 
             Console.WriteLine();
-            if(Player.players.Count == 3)
+            if (Player.players.Count == 3)
                 Console.WriteLine("\n\n모두 무사히 합류했습니다.\n");
             else
+            {
+                Console.WriteLine(Player.players.Count);
+
+                foreach(Player item in Player.players)
+                {
+                    Console.WriteLine(item.name);
+                }
+
                 Console.WriteLine("Error");
+            }
 
             Thread.Sleep(1200);
             Console.ForegroundColor = ConsoleColor.White;
+            SelectPlayer = new int[3];
             Cmd.batComplete = false;
             Console.WriteLine("배치를 시작합니다.\n");
+            Cmd.stage = 1;
             Cmd.BatchCmd();
         }
 

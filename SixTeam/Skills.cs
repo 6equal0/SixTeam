@@ -88,6 +88,9 @@ namespace SixTeam
                 }
 
                 player.isAttack = true;
+
+                if(player.position == 0)
+                    Player.AttackNum++;
             }
             else
             {
@@ -109,6 +112,8 @@ namespace SixTeam
                 Console.WriteLine("이 적 모두를 해킹했습니다.");
 
                 player.isAttack = true;
+                if (player.position == 0)
+                    Player.AttackNum++;
             }
             else
             {
@@ -125,8 +130,6 @@ namespace SixTeam
                 Console.WriteLine("는 3턴 뒤 자폭합니다.");
 
                 player.boomTurn = Cmd.turn + 3;
-
-                player.isAttack = true;
             }
             else
             {
@@ -142,6 +145,10 @@ namespace SixTeam
                 foreach(Player item in Player.players)
                 {
                     item.hp += 4;
+
+                    player.isAttack = true;
+                    if (player.position == 0)
+                        Player.AttackNum++;
                 }
 
                 Console.WriteLine("모든 플레이어가 Hp를 4 회복했습니다.");
@@ -162,6 +169,10 @@ namespace SixTeam
 
                 TextOptions.TextColor(ConsoleColor.Green, player.name);
                 Console.WriteLine("은 2턴동안 무적입니다.");
+
+                player.isAttack = true;
+                if (player.position == 0)
+                    Player.AttackNum++;
             }
             else
             {
@@ -198,6 +209,8 @@ namespace SixTeam
                 Console.WriteLine("가 운동을 하여 Hp를 2 소모해 공격력을 3 얻었습니다.");
 
                 player.isAttack = true;
+                if (player.position == 0)
+                    Player.AttackNum++;
             }
             else
             {
@@ -220,6 +233,8 @@ namespace SixTeam
                 Console.WriteLine("가 2 회복했습니다.");
 
                 player.isAttack = true;
+                if (player.position == 0)
+                    Player.AttackNum++;
             }
             else
             {

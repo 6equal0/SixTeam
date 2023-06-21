@@ -20,7 +20,9 @@ namespace SixTeam
         public int prikey;
         public string name;
         public delegate void ActiveSkill(string name);
+        private int defHp;
         internal int hp;
+        private int defPower;
         internal int power;
         public int plusPower = 0;
         public int defensive;
@@ -40,11 +42,14 @@ namespace SixTeam
         public Player(string name, int hp, int power, int defensive)
         {
             this.name = name;
-            Hp = hp;
-            this.power = power;
+            defHp = hp;
+            defPower = power;
             this.defensive = defensive;
 
             unequipPlayers.Add(this);
+
+            this.hp = defHp;
+            this.power = defPower;
 
             prikey = primaryKey;
             primaryKey++;
@@ -143,7 +148,8 @@ namespace SixTeam
                 TextOptions.TextColor(ConsoleColor.Green, name);
                 Console.WriteLine("는 폭발합니다.");
 
-                Monster.monsters[rand.Next(0, Monster.monsters.Count)].Die();
+                if(Monster.monsters.Count != 0)
+                    Monster.monsters[rand.Next(0, Monster.monsters.Count)].Die();
                 Die();
             }
             else if (invTurn == Cmd.turn)
@@ -158,9 +164,16 @@ namespace SixTeam
         {
             TextOptions.TextColor(ConsoleColor.Green, name);
             Console.WriteLine($"(이)가 사망했습니다.\n");
+            Player.unequipPlayers.Remove(this);
             die = true;
 
             Pop();
+        }
+
+        public void Reset()
+        {
+            hp = defHp;
+            power = defPower;
         }
 
         public void ShowStatus()
@@ -221,6 +234,11 @@ namespace SixTeam
 
         public void Pop()
         {
+            if (position == 1)
+                frontPlayers.Remove(this);
+            else if (position == 0)
+                backPlayers.Remove(this);
+
             players.Remove(this);
         }
     }
