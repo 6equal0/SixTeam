@@ -39,9 +39,9 @@ namespace SixTeam
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             MainMenu.Texting("전설의 해적 ",30);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            MainMenu.Texting(username + "\n\n\n\n\n\n\n",30);
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.Write(" " + username + " \n\n\n\n\n\n\n");
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -114,9 +114,9 @@ namespace SixTeam
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("전설의 해적 ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(username + "\n\n\n\n\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.Write(" " + username + " \n\n\n\n\n\n\n");
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -147,9 +147,9 @@ namespace SixTeam
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("전설의 해적 ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(username + "\n\n\n\n\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.Write(" " + username + " \n\n\n\n\n\n\n");
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -181,9 +181,9 @@ namespace SixTeam
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("전설의 해적 ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(username + "\n\n\n\n\n\n\n");
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.Write(" " + username + " \n\n\n\n\n\n\n");
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Gray;
