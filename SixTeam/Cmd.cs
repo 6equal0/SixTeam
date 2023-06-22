@@ -159,7 +159,7 @@ namespace SixTeam
 
             Console.Clear();
 
-            if (Lobby.day == 5 && turn == stage)
+            if (Lobby.day == 5 && 3 == stage)
             {
                 Console.WriteLine($"{Lobby.day}일차 보스 스테이지");
 
@@ -174,7 +174,9 @@ namespace SixTeam
                 switch (Lobby.day)
                 {
                     case 1:
-                        Monster.monsters.Add(Monster.monsters1[rand.Next(0, Monster.monsters1.Count)]);
+                        int rnd = rand.Next(0, Monster.monsters1.Count);
+                        Monster.monsters.Add(Monster.monsters1[rnd]);
+                        Monster.monsters1.Remove(Monster.monsters1[rnd]);
                         break;
                     case 2:
                         Monster.monsters.Add(Monster.monsters2[rand.Next(0, Monster.monsters2.Count)]);
@@ -213,13 +215,13 @@ namespace SixTeam
                 Thread.Sleep(500);
                 foreach (Monster item in Monster.monsters)
                 {
-                    if(Player.frontPlayers.Count == 0)
-                    {
-                        item.Attack(Player.backPlayers);
-                    }
-                    else if(Player.frontPlayers.Count > 0)
+                    if(Player.frontPlayers.Count > 0)
                     {
                         item.Attack(Player.frontPlayers);
+                    }
+                    else if (Player.frontPlayers.Count == 0 && Player.backPlayers.Count > 0)
+                    {
+                        item.Attack(Player.backPlayers);
                     }
                     else
                     {
@@ -242,6 +244,7 @@ namespace SixTeam
             {
                 item.plusPower = 0;
                 item.boomTurn = -1;
+                item.skillable = true;
             }
             foreach(Monster item in Monster.unequipMonsters)
             {
@@ -253,7 +256,7 @@ namespace SixTeam
             {
                 TextOptions.TextColor(ConsoleColor.DarkGreen, "승리하였습니다.");
 
-                if (stage > rand.Next(1, 4))
+                if (stage > 0/* rand.Next(1, 4)*/)
                 {
                     for (int i = Player.players.Count - 1; i >= 0; i--)
                     {
@@ -430,6 +433,13 @@ namespace SixTeam
                 yn = Console.ReadLine();
                 if (yn == "y")
                 {
+                    if(Player.frontPlayers.Count + Player.backPlayers.Count != 3)
+                    {
+                        Console.WriteLine("모든 플레이어를 배치해야 합니다.");
+
+                        BatchCmd();
+                    }
+
                     if(Player.frontPlayers.Count == 3)
                     {
                         Console.WriteLine("전열에 모든 플레이어를 배치할 수 없습니다.");

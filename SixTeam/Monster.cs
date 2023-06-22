@@ -190,11 +190,11 @@ namespace SixTeam
 
             if (player1.position == 1)
             {
-                player1.Damaged((int)MathF.Max(0, power/2 - player1.defensive));
+                player1.Damaged((int)MathF.Max(0, MathF.Ceiling(power * 0.7f) - player1.defensive));
             }
             else if (player1.position == 0)
             {
-                player1.Damaged(power);
+                player1.Damaged((int)MathF.Ceiling(power * 0.7f));
             }
             else
             {
@@ -203,11 +203,11 @@ namespace SixTeam
 
             if (player2.position == 1)
             {
-                player2.Damaged((int)MathF.Max(0, power/2 - player2.defensive));
+                player2.Damaged((int)MathF.Max(0, MathF.Ceiling(power * 0.7f) - player2.defensive));
             }
             else if (player2.position == 0)
             {
-                player2.Damaged(power);
+                player2.Damaged((int)MathF.Ceiling(power * 0.7f));
             }
             else
             {
@@ -347,11 +347,34 @@ namespace SixTeam
         public void Push()
         {
             monsters.Add(this);
+
+            unequipMonsters.Remove(this);
         }
 
         public void Pop()
         {
             monsters.Remove(this);
+
+            unequipMonsters.Add(this);
+
+            switch (turn)
+            {
+                case 1:
+                    Monster.monsters1.Add(this);
+                    break;
+                case 2:
+                    Monster.monsters2.Add(this);
+                    break;
+                case 3:
+                    Monster.monsters3.Add(this);
+                    break;
+                case 4:
+                    Monster.monsters4.Add(this);
+                    break;
+                case 5:
+                    Monster.monsters5.Add(this);
+                    break;
+            }
         }
     }
 }

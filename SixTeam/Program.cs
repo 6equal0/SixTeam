@@ -33,29 +33,39 @@ namespace SixTeam
             Monster monster11 = new Monster("정어리_검사", 7, 5, 1);
             Monster monster12 = new Monster("조개_보병", 12, 5, 1);
             Monster monster13 = new Monster("크릴새우_패거리", 3, 6, 1);
+            Monster monster14 = new Monster("멸치_검사", 6, 6, 1);
+            Monster monster15 = new Monster("말미잘_보병", 10, 3, 1);
+            Monster monster16 = new Monster("새우_소총수", 3, 6, 1);
 
             Monster monster21 = new Monster("흰동가리_마법사", 5, 7, 2);
             Monster monster22 = new Monster("굴_중보병", 16, 5, 2);
             Monster monster23 = new Monster("고등어_전사", 9, 8, 2);
             Monster monster24 = new Monster("해삼_돌격병", 10, 6, 2);
+            Monster monster25 = new Monster("성게_검사", 7, 8, 2);
+            Monster monster26 = new Monster("키조괘_보병", 8, 7, 2);
 
             Monster monster31 = new Monster("미꾸라지_검사", 6, 9, 3);
             Monster monster32 = new Monster("장어_병사", 15, 6, 3);
             Monster monster33 = new Monster("피라냐_암살자", 5, 9, 3);
             Monster monster34 = new Monster("돛사치_기사", 16, 4, 3);
             Monster monster35 = new Monster("방어_갑옷기사", 23, 2, 3);
+            Monster monster36 = new Monster("해마_소총수", 3, 13, 3);
 
             Monster monster41 = new Monster("청새치_군사", 13, 7, 4);
             Monster monster42 = new Monster("백상아리_장군", 15, 12, 4);
             Monster monster43 = new Monster("가자미_패거리", 10, 6, 4);
             Monster monster44 = new Monster("용감한_개복치", 7, 3, 4);
             Monster monster45 = new Monster("참다랑어_마법사", 4, 8, 4);
+            Monster monster46 = new Monster("불가사리_중보병", 18, 7, 4);
 
             Monster monster51 = new Monster("문어_수도승", 11, 11, 5);
             Monster monster52 = new Monster("꽃게_중보병", 20, 8, 5);
             Monster monster53 = new Monster("백상아리_전차", 7, 13, 5);
+            Monster monster54 = new Monster("오징어_전사", 5, 14, 5);
+            Monster monster55 = new Monster("혹등고래_기사", 22, 6, 5);
+            Monster monster56 = new Monster("전기뱀장어_마법사", 2, 16, 5);
 
-            Monster boss = new Monster("크라켄", 14, 50, 5, true);
+            Monster boss = new Monster("크라켄", 50, 14, 5, true);
             #endregion
 
             MainMenu.Question();
