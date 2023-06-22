@@ -184,6 +184,12 @@ namespace SixTeam
         {
             hp = defHp;
             power = defPower;
+            plusPower = 0;
+            boomTurn = -1;
+            skillable = true;
+            position = -1;
+
+            Console.WriteLine($"{name} 리셋됨");
         }
 
         public void ShowStatus()
@@ -244,9 +250,9 @@ namespace SixTeam
 
         public void Pop()
         {
-            if (position == 1)
+            if (frontPlayers.Contains(this))
                 frontPlayers.Remove(this);
-            else if (position == 0)
+            else if (backPlayers.Contains(this))
                 backPlayers.Remove(this);
 
             players.Remove(this);

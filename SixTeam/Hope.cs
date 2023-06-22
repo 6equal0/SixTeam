@@ -24,7 +24,7 @@ namespace SixTeam
             while (playerCounts.Count < 5)
             {
                 i++;
-                playerCount = rand.Next(1, 22);
+                playerCount = rand.Next(1, 6);
                 playerCounts.Add(playerCount);
             }
             foreach (var item in playerCounts)
