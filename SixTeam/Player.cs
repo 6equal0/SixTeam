@@ -188,8 +188,6 @@ namespace SixTeam
             boomTurn = -1;
             skillable = true;
             position = -1;
-
-            Console.WriteLine($"{name} 리셋됨");
         }
 
         public void ShowStatus()
