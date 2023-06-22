@@ -42,7 +42,7 @@ namespace SixTeam
             Monster monster23 = new Monster("고등어_전사", 9, 8, 2);
             Monster monster24 = new Monster("해삼_돌격병", 10, 6, 2);
             Monster monster25 = new Monster("성게_검사", 7, 8, 2);
-            Monster monster26 = new Monster("키조괘_보병", 8, 7, 2);
+            Monster monster26 = new Monster("키조개_보병", 8, 7, 2);
 
             Monster monster31 = new Monster("미꾸라지_검사", 6, 9, 3);
             Monster monster32 = new Monster("장어_병사", 15, 6, 3);

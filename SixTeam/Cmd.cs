@@ -256,14 +256,14 @@ namespace SixTeam
             {
                 TextOptions.TextColor(ConsoleColor.DarkGreen, "승리하였습니다.");
 
-                if (stage > 0/* rand.Next(1, 4)*/)
+                if (stage > rand.Next(1, 4))
                 {
                     for (int i = Player.players.Count - 1; i >= 0; i--)
                     {
                         Player.players[i].Reset();
                         Player.players[i].Pop();
-                        Thread.Sleep(1000);
                     }
+                    Thread.Sleep(1000);
 
                     Console.WriteLine("로비로 돌아갑니다.");
                     Thread.Sleep(500);
