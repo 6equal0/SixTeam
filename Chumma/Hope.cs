@@ -7,7 +7,6 @@ namespace Chumma
     class Hope
     {
         public int playerCount;
-       
         public int[] randChar;
         public List<int> player_number = new List<int>();
         Random rand = new Random();
